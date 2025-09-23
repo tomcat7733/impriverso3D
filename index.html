@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Impriverso3D | Diseño e Impresión 3D a medida</title>
+  <meta name="description" content="Impriverso3D: diseño CAD y fabricación aditiva 100% personalizada. Prototipado, piezas funcionales y objetos únicos con PLA, PETG, ABS y resina.">
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
+  <!-- YouTube Subscribe Button -->
+  <script async src="https://apis.google.com/js/platform.js"></script>
+  <!-- Instagram embeds (para posts individuales opcionalmente) -->
+  <script async src="//www.instagram.com/embed.js"></script>
+  <!-- three.js + STLLoader + OrbitControls para visor 3D -->
+  <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+  <script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://unpkg.com/three@0.158.0/examples/js/loaders/STLLoader.js"></script>
+
+  <!-- Schema.org -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Impriverso3D",
+    "url": "https://impriverso3d.netlify.app",
+    "description": "Diseño CAD y fabricación aditiva a medida: prototipado, piezas funcionales y objetos personalizados.",
+    "sameAs": ["https://www.youtube.com/@Impriverso3D","https://www.instagram.com/impriverso3d/"]
+  }
+  </script>
+</head>
+<body>
+  <header class="header">
+    <div class="brand">
+      <img src="assets/logo.svg" alt="Impriverso3D logo" class="logo"/>
+      <span>Impriverso3D</span>
+    </div>
+    <button id="navToggle" class="nav-toggle" aria-label="Abrir menú">☰</button>
+    <nav id="nav" class="nav">
+      <a href="#servicios">Servicios</a>
+      <a href="#configurador">Configurador</a>
+      <a href="#galeria">Galería</a>
+      <a href="#youtube">YouTube</a>
+      <a href="#instagram">Instagram</a>
+      <a href="#contacto" class="cta">Contactar</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <h1>Diseño &amp; Impresión 3D <span class="gradient">100% personalizada</span></h1>
+      <p>De la idea al objeto físico: prototipos, piezas funcionales y objetos únicos. Calidad de estudio, tiempos ágiles.</p>
+      <div class="hero-cta">
+        <a href="#configurador" class="btn primary">Configura tu pieza</a>
+        <a href="#contacto" class="btn ghost">Pide presupuesto</a>
+      </div>
+      <ul class="badges">
+        <li>PLA · PETG · ABS · Resina</li>
+        <li>Diseño CAD</li>
+        <li>Acabados premium</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="servicios" class="section">
+    <h2>Servicios</h2>
+    <div class="cards">
+      <article class="card">
+        <h3>Diseño CAD</h3>
+        <p>Modelado paramétrico y reverse engineering. Recibo bocetos o referencias y los convierto en modelos 3D listos para imprimir.</p>
+      </article>
+      <article class="card">
+        <h3>Prototipado rápido</h3>
+        <p>Iteraciones ágiles para validar encajes, ergonomía y mecánica. Entrega exprés bajo demanda.</p>
+      </article>
+      <article class="card">
+        <h3>Impresión 3D</h3>
+        <p>FDM y resina. Ajuste fino de capa, infill y soportes para la mejor relación calidad/tiempo/coste.</p>
+      </article>
+      <article class="card">
+        <h3>Personalización</h3>
+        <p>Color, textura y post-procesado (lijado, imprimación, pintura). Tu pieza, tu estilo.</p>
+      </article>
+    </div>
+  </section>
+
+  <section id="configurador" class="section configurator">
+    <h2>Configurador &amp; Estimador de precio</h2>
+    <p class="sub">Sube tu STL, ajusta parámetros y obtén una estimación al vuelo. (Vista previa STL local, sin subir a servidor)</p>
+
+    <div class="config-grid">
+      <div class="panel">
+        <label class="file-drop" id="fileDrop">
+          <input type="file" id="stlInput" accept=".stl" hidden>
+          <span>Arrastra tu archivo <strong>.stl</strong> o haz clic</span>
+        </label>
+
+        <div class="field">
+          <label>Tamaño (máx. dimensión) <span id="sizeVal">10</span> cm</label>
+          <input type="range" id="size" min="2" max="40" value="10">
+        </div>
+
+        <div class="field">
+          <label>Material</label>
+          <select id="material">
+            <option value="PLA">PLA</option>
+            <option value="PETG">PETG</option>
+            <option value="ABS">ABS</option>
+            <option value="RESINA">Resina</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label>Densidad de relleno <span id="infillVal">20</span>%</label>
+          <input type="range" id="infill" min="0" max="100" value="20">
+        </div>
+
+        <div class="field">
+          <label>Acabado</label>
+          <select id="finish">
+            <option value="estandar">Estándar</option>
+            <option value="premium">Premium (lijado + pintado)</option>
+          </select>
+        </div>
+
+        <div class="price-box">
+          <div>
+            <small>Estimación</small>
+            <div class="price"><span id="price">—</span> €</div>
+          </div>
+          <button id="addToQuote" class="btn primary">Añadir a solicitud</button>
+        </div>
+      </div>
+
+      <div class="viewer">
+        <canvas id="stlCanvas"></canvas>
+        <div class="viewer-hint">Vista 3D interactiva (gira/zoom)</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="galeria" class="section">
+    <h2>Galería</h2>
+    <p class="sub">Algunos ejemplos. Pide los tuyos con tu toque personal.</p>
+    <div class="gallery">
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+1" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+1" alt="Proyecto 1"></a>
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+2" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+2" alt="Proyecto 2"></a>
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+3" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+3" alt="Proyecto 3"></a>
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+4" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+4" alt="Proyecto 4"></a>
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+5" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+5" alt="Proyecto 5"></a>
+      <a href="https://placehold.co/1200x800?text=Impriverso3D+6" class="g-item"><img src="https://placehold.co/400x300?text=Proyecto+6" alt="Proyecto 6"></a>
+    </div>
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <img id="lightboxImg" alt="Vista ampliada" />
+      <button class="close" id="lightboxClose" aria-label="Cerrar">×</button>
+    </div>
+  </section>
+
+  <section id="youtube" class="section">
+    <h2>YouTube</h2>
+    <p class="sub">Contenido de diseño e impresión 3D en <a href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener">youtube.com/@Impriverso3D</a></p>
+
+    <!-- Botón oficial de suscripción -->
+    <div class="yt-sub">
+      <!-- Si el botón no aparece, reemplaza data-channel por data-channelid con tu Channel ID real -->
+      <div class="g-ytsubscribe" data-channel="@Impriverso3D" data-layout="full" data-count="default"></div>
+      <a class="btn ghost" href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener">Ver canal</a>
+    </div>
+
+    <!-- Carrusel de vídeos embebidos -->
+    <div class="yt-carousel">
+      <button class="carousel-btn" id="prevVid" aria-label="Vídeo anterior">‹</button>
+      <div class="yt-frame">
+        <iframe id="ytPlayer" width="560" height="315" src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Impriverso3D - video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+      </div>
+      <button class="carousel-btn" id="nextVid" aria-label="Vídeo siguiente">›</button>
+    </div>
+    <p class="note">💡 Edita <code>videoIds</code> en <code>script.js</code> para apuntar a tus últimos vídeos.</p>
+  </section>
+
+  <section id="instagram" class="section">
+    <h2>Instagram</h2>
+    <p class="sub">Demos, making-of y piezas terminadas en <a href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener">@impriverso3d</a></p>
+    <div class="ig-follow">
+      <a class="btn primary" href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener">Seguir en Instagram</a>
+    </div>
+    <div class="ig-grid">
+      <!--
+        Para embeber posts individuales, pega aquí el HTML "embed" de Instagram (desde la app/versión web) y se renderizará con el script de Instagram.
+        Ejemplo (sustituir URL por la de tu post):
+        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/XXXXXXXXX/" data-instgrm-version="14"></blockquote>
+      -->
+      <div class="ig-placeholder">Añade tus posts embebidos aquí 🤝</div>
+    </div>
+  </section>
+
+  <section id="faq" class="section">
+    <h2>FAQ</h2>
+    <div class="faq">
+      <details>
+        <summary>¿Qué materiales trabajas?</summary>
+        <p>PLA, PETG, ABS y resina. Si necesitas otro, lo vemos.</p>
+      </details>
+      <details>
+        <summary>¿Puedo enviar mi propio STL?</summary>
+        <p>Claro. Puedes cargarlo arriba para vista previa y estimación.</p>
+      </details>
+      <details>
+        <summary>¿Tiempo de entrega?</summary>
+        <p>Depende de tamaño, material y cola de trabajo. Estándar: 2–7 días.</p>
+      </details>
+    </div>
+  </section>
+
+  <section id="contacto" class="section contact">
+    <h2>Contacto</h2>
+    <p class="sub">Cuéntame tu idea y te respondo con un presupuesto ajustado.</p>
+
+    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="form">
+      <input type="hidden" name="form-name" value="contact">
+      <p class="hidden">
+        <label>No rellenar: <input name="bot-field" /></label>
+      </p>
+      <div class="form-grid">
+        <label>Nombre*<input type="text" name="nombre" required></label>
+        <label>Email*<input type="email" name="email" required></label>
+        <label>Tipo de pieza<select name="tipo">
+          <option>Prototipo</option>
+          <option>Pieza funcional</option>
+          <option>Objeto decorativo</option>
+        </select></label>
+        <label>Archivo (STL/ZIP opcional)<input type="file" name="archivo"></label>
+        <label class="full">Descripción*<textarea name="mensaje" rows="5" required placeholder="Cuéntame dimensiones, material preferido, uso previsto…"></textarea></label>
+      </div>
+      <button class="btn primary" type="submit">Enviar</button>
+    </form>
+    <p class="note">Este formulario usa <strong>Netlify Forms</strong> (sin backend). Revisa tus envíos en el panel de Netlify.</p>
+  </section>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> Impriverso3D — Diseño &amp; Impresión 3D a medida.</p>
+    <div class="social">
+      <a href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener" aria-label="YouTube">@Impriverso3D</a>
+      <a href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener" aria-label="Instagram">@impriverso3d</a>
+      <a href="mailto:contacto@impriverso3d.com" aria-label="Email">contacto@impriverso3d.com</a>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
