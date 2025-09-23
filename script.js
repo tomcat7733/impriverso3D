@@ -17,23 +17,19 @@ const priceEl = document.getElementById('price');
 const addToQuote = document.getElementById('addToQuote');
 
 function calcPrice(){
-  // Heurística simple: base por volumen/tiempo estimado.
-  const s = Number(size.value);      // cm (máx dimensión)
-  const d = Number(infill.value);    // %
+  const s = Number(size.value);
+  const d = Number(infill.value);
   const mat = material.value;
   const fin = finish.value;
 
-  // Coeficientes por material
   const matK = { 'PLA': 1.0, 'PETG': 1.2, 'ABS': 1.3, 'RESINA': 1.6 }[mat] || 1.0;
   const finishK = (fin === 'premium') ? 1.35 : 1.0;
 
-  // Fórmula estimada (no real): base = s^2 * (0.08 + d/300) * matK
   let base = Math.pow(s, 2) * (0.08 + d/300) * matK;
   base = base * finishK;
 
-  const price = Math.max(12, Math.round(base)); // mínimo 12€
+  const price = Math.max(12, Math.round(base));
   priceEl.textContent = price.toString();
-  // persist
   localStorage.setItem('impriverso_cfg', JSON.stringify({s,d,mat,fin,price}));
   return price;
 }
@@ -43,7 +39,6 @@ function calcPrice(){
   infillVal.textContent = infill.value;
   calcPrice();
 }));
-// init UI
 sizeVal.textContent = size.value;
 infillVal.textContent = infill.value;
 calcPrice();
@@ -101,7 +96,6 @@ function loadSTLFromFile(file){
     const material = new THREE.MeshStandardMaterial({ color: 0x88aaff, metalness: 0.1, roughness: 0.6 });
     if(mesh){ scene.remove(mesh); mesh.geometry.dispose(); }
     mesh = new THREE.Mesh(geometry, material);
-    // centrado y escalado básico
     geometry.computeBoundingBox();
     const bb = geometry.boundingBox;
     const sizeX = bb.max.x - bb.min.x;
@@ -174,3 +168,69 @@ try{
     sizeVal.textContent = saved.s; infillVal.textContent = saved.d; calcPrice();
   }
 }catch{}
+
+// === AI Assistant Widget ===
+const aiFab = document.getElementById('ai-fab');
+const aiPanel = document.getElementById('ai-panel');
+const aiClose = document.getElementById('ai-close');
+const aiForm = document.getElementById('ai-form');
+const aiInput = document.getElementById('ai-input');
+const aiMessages = document.getElementById('ai-messages');
+const aiMessagesState = [];
+
+function pushMsg(role, text){
+  const wrapper = document.createElement('div');
+  wrapper.className = 'ai-msg ' + (role === 'user' ? 'ai-user' : 'ai-bot');
+  const bubble = document.createElement('div');
+  bubble.className = 'ai-bubble';
+  bubble.textContent = text;
+  wrapper.appendChild(bubble);
+  aiMessages.appendChild(wrapper);
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+  aiMessagesState.push({ role, content: text });
+}
+function setTyping(on){
+  if(on){
+    const w = document.createElement('div');
+    w.className = 'ai-msg ai-bot ai-typing';
+    const b = document.createElement('div');
+    b.className = 'ai-bubble';
+    b.textContent = 'Escribiendo…';
+    w.appendChild(b);
+    w.id = 'ai-typing';
+    aiMessages.appendChild(w);
+  } else {
+    document.getElementById('ai-typing')?.remove();
+  }
+  aiMessages.scrollTop = aiMessages.scrollHeight;
+}
+aiFab?.addEventListener('click', ()=>{ aiPanel.classList.toggle('show'); aiPanel.setAttribute('aria-hidden', aiPanel.classList.contains('show') ? 'false':'true'); aiInput?.focus(); });
+aiClose?.addEventListener('click', ()=>{ aiPanel.classList.remove('show'); aiPanel.setAttribute('aria-hidden', 'true'); });
+
+aiForm?.addEventListener('submit', async (e)=>{
+  e.preventDefault();
+  const q = aiInput.value.trim();
+  if(!q) return;
+  pushMsg('user', q);
+  aiInput.value = '';
+  setTyping(true);
+  try{
+    const res = await fetch('/api/ai-chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: aiMessagesState })
+    });
+    const data = await res.json();
+    setTyping(false);
+    if(data?.reply){
+      pushMsg('assistant', data.reply);
+    } else {
+      pushMsg('assistant', 'Ups, no pude procesar tu consulta ahora 😅 Intenta de nuevo en unos segundos.');
+      console.error('AI error', data);
+    }
+  } catch(err){
+    setTyping(false);
+    pushMsg('assistant', 'Error de red. Revisa tu conexión.');
+    console.error(err);
+  }
+});

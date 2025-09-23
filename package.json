@@ -1,0 +1,9 @@
+{
+  "name": "impriverso3d",
+  "private": true,
+  "scripts": {
+    "dev": "netlify dev",
+    "build": "echo 'Static site - nothing to build'",
+    "start": "netlify dev"
+  }
+}

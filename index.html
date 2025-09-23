@@ -4,29 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Impriverso3D | Diseño e Impresión 3D a medida</title>
-  <meta name="description" content="Impriverso3D: diseño CAD y fabricación aditiva 100% personalizada. Prototipado, piezas funcionales y objetos únicos con PLA, PETG, ABS y resina.">
+  <meta name="description" content="Impriverso3D: diseño CAD y fabricación aditiva 100% personalizada. Prototipado, piezas funcionales y piezas únicas en PLA, PETG, ABS y resina.">
   <link rel="stylesheet" href="style.css" />
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml" />
-  <!-- YouTube Subscribe Button -->
   <script async src="https://apis.google.com/js/platform.js"></script>
-  <!-- Instagram embeds (para posts individuales opcionalmente) -->
   <script async src="//www.instagram.com/embed.js"></script>
-  <!-- three.js + STLLoader + OrbitControls para visor 3D -->
   <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
   <script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://unpkg.com/three@0.158.0/examples/js/loaders/STLLoader.js"></script>
-
-  <!-- Schema.org -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ProfessionalService",
-    "name": "Impriverso3D",
-    "url": "https://impriverso3d.netlify.app",
-    "description": "Diseño CAD y fabricación aditiva a medida: prototipado, piezas funcionales y objetos personalizados.",
-    "sameAs": ["https://www.youtube.com/@Impriverso3D","https://www.instagram.com/impriverso3d/"]
-  }
-  </script>
 </head>
 <body>
   <header class="header">
@@ -66,15 +51,15 @@
     <div class="cards">
       <article class="card">
         <h3>Diseño CAD</h3>
-        <p>Modelado paramétrico y reverse engineering. Recibo bocetos o referencias y los convierto en modelos 3D listos para imprimir.</p>
+        <p>Modelado paramétrico y reverse engineering. Bocetos → modelos 3D listos para imprimir.</p>
       </article>
       <article class="card">
         <h3>Prototipado rápido</h3>
-        <p>Iteraciones ágiles para validar encajes, ergonomía y mecánica. Entrega exprés bajo demanda.</p>
+        <p>Iteraciones ágiles para validar encajes, ergonomía y mecánica. Entrega exprés.</p>
       </article>
       <article class="card">
         <h3>Impresión 3D</h3>
-        <p>FDM y resina. Ajuste fino de capa, infill y soportes para la mejor relación calidad/tiempo/coste.</p>
+        <p>FDM y resina. Ajuste fino de capa, infill y soportes para el mejor balance calidad/tiempo/coste.</p>
       </article>
       <article class="card">
         <h3>Personalización</h3>
@@ -84,8 +69,8 @@
   </section>
 
   <section id="configurador" class="section configurator">
-    <h2>Configurador &amp; Estimador de precio</h2>
-    <p class="sub">Sube tu STL, ajusta parámetros y obtén una estimación al vuelo. (Vista previa STL local, sin subir a servidor)</p>
+    <h2>Configurador &amp; Estimador</h2>
+    <p class="sub">Sube tu STL, ajusta parámetros y obtén una estimación al vuelo (client-side).</p>
 
     <div class="config-grid">
       <div class="panel">
@@ -158,15 +143,10 @@
   <section id="youtube" class="section">
     <h2>YouTube</h2>
     <p class="sub">Contenido de diseño e impresión 3D en <a href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener">youtube.com/@Impriverso3D</a></p>
-
-    <!-- Botón oficial de suscripción -->
     <div class="yt-sub">
-      <!-- Si el botón no aparece, reemplaza data-channel por data-channelid con tu Channel ID real -->
       <div class="g-ytsubscribe" data-channel="@Impriverso3D" data-layout="full" data-count="default"></div>
       <a class="btn ghost" href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener">Ver canal</a>
     </div>
-
-    <!-- Carrusel de vídeos embebidos -->
     <div class="yt-carousel">
       <button class="carousel-btn" id="prevVid" aria-label="Vídeo anterior">‹</button>
       <div class="yt-frame">
@@ -184,11 +164,6 @@
       <a class="btn primary" href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener">Seguir en Instagram</a>
     </div>
     <div class="ig-grid">
-      <!--
-        Para embeber posts individuales, pega aquí el HTML "embed" de Instagram (desde la app/versión web) y se renderizará con el script de Instagram.
-        Ejemplo (sustituir URL por la de tu post):
-        <blockquote class="instagram-media" data-instgrm-permalink="https://www.instagram.com/p/XXXXXXXXX/" data-instgrm-version="14"></blockquote>
-      -->
       <div class="ig-placeholder">Añade tus posts embebidos aquí 🤝</div>
     </div>
   </section>
@@ -214,7 +189,6 @@
   <section id="contacto" class="section contact">
     <h2>Contacto</h2>
     <p class="sub">Cuéntame tu idea y te respondo con un presupuesto ajustado.</p>
-
     <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" class="form">
       <input type="hidden" name="form-name" value="contact">
       <p class="hidden">
@@ -244,6 +218,29 @@
       <a href="mailto:contacto@impriverso3d.com" aria-label="Email">contacto@impriverso3d.com</a>
     </div>
   </footer>
+
+  <!-- AI Assistant Widget -->
+  <div id="ai-widget" class="ai-widget" aria-live="polite">
+    <button id="ai-fab" class="ai-fab" aria-label="Abrir asistente IA">🤖</button>
+    <div id="ai-panel" class="ai-panel" aria-hidden="true">
+      <div class="ai-header">
+        <div class="ai-title">Asistente 3D · Filamento</div>
+        <button id="ai-close" class="ai-close" aria-label="Cerrar">×</button>
+      </div>
+      <div id="ai-messages" class="ai-messages">
+        <div class="ai-msg ai-bot">
+          <div class="ai-bubble">
+            ¡Hola! Soy tu asistente de impresión 3D con filamento. Cuéntame tu setup (impresora, material y parámetros) o el problema que tienes 🔧
+          </div>
+        </div>
+      </div>
+      <form id="ai-form" class="ai-form">
+        <input id="ai-input" name="q" type="text" placeholder="Ej. PLA stringing a 210°C, 0.2mm capa, 60mm/s…" autocomplete="off" required />
+        <button class="btn primary" type="submit">Enviar</button>
+      </form>
+      <div class="ai-footnote">Privado. No se publican tus datos. Procesado por un modelo LLM.</div>
+    </div>
+  </div>
 
   <script src="script.js"></script>
 </body>
