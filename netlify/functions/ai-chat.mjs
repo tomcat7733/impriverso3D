@@ -3,8 +3,8 @@ export default async (req) => {
     return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405, headers: { "content-type": "application/json" } });
   }
 
-  // Netlify exposes env like this in ESM functions
-  const OPENAI_API_KEY = Netlify.env.get("OPENAI_API_KEY");
+  // Netlify env (v2) — fallback a process.env por compatibilidad
+  const OPENAI_API_KEY = (globalThis.Netlify?.env?.get?.("OPENAI_API_KEY")) ?? process.env.OPENAI_API_KEY;
   if (!OPENAI_API_KEY) {
     return new Response(JSON.stringify({ error: "Missing OPENAI_API_KEY env var" }), { status: 500, headers: { "content-type": "application/json" } });
   }
@@ -39,11 +39,7 @@ export default async (req) => {
         "Content-Type": "application/json",
         "Authorization": `Bearer ${OPENAI_API_KEY}`
       },
-      body: JSON.stringify({
-        model,
-        input,
-        temperature
-      })
+      body: JSON.stringify({ model, input, temperature })
     });
 
     if (!r.ok) {
