@@ -1,3 +1,4 @@
+
 [build]
   functions = "netlify/functions"
   publish = "."
@@ -8,5 +9,23 @@
 [[redirects]]
   from = "/api/ai-chat"
   to = "/.netlify/functions/ai-chat"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/youtube-latest"
+  to = "/.netlify/functions/youtube-latest"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/instagram-feed"
+  to = "/.netlify/functions/instagram-feed"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/api/stripe-checkout"
+  to = "/.netlify/functions/stripe-checkout"
   status = 200
   force = true
