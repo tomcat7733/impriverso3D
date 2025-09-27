@@ -14,12 +14,12 @@ function applyI18n(){
 }
 document.getElementById('langToggle')?.addEventListener('click', ()=> loadI18n(I18N.current==='es'?'en':'es')); loadI18n(I18N.current);
 
-// Estimador
+// Estimador PLA/PETG
 const size = document.getElementById('size'); const sizeVal = document.getElementById('sizeVal');
 const infill = document.getElementById('infill'); const infillVal = document.getElementById('infillVal');
 const material = document.getElementById('material'); const finish = document.getElementById('finish'); const priceEl = document.getElementById('price');
 function calcPrice(){ const s=Number(size.value), d=Number(infill.value), mat=material.value, fin=finish.value;
-  const k = {PLA:1, PETG:1.2, ABS:1.3, ASA:1.35, TPU:1.4}[mat]||1; const finK = fin==='premium'?1.35:1;
+  const k = {PLA:1.0, PETG:1.2}[mat]||1.0; const finK = fin==='premium'?1.35:1;
   let base = Math.pow(s,2)*(0.08 + d/300)*k*finK; const price = Math.max(12, Math.round(base)); priceEl.textContent = String(price);
   localStorage.setItem('impriverso_cfg', JSON.stringify({s,d,mat,fin,price})); return price; }
 [size,infill,material,finish].forEach(el=> el?.addEventListener('input', ()=>{ sizeVal.textContent=size.value; infillVal.textContent=infill.value; calcPrice(); }));
@@ -72,7 +72,7 @@ async function loadIG(limit=8){
 }
 loadIG(8);
 
-// Stripe Checkout
+// Stripe Checkout (PLA/PETG/EXPRESS)
 async function startCheckout(product){ try{ const r=await fetch('/api/stripe-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product})}); const data=await r.json(); if(data?.url) window.location.href=data.url; else alert('No se pudo iniciar el pago.'); }catch(e){ alert('Error iniciando pago'); } }
 document.querySelectorAll('[data-product]').forEach(b=> b.addEventListener('click', ()=> startCheckout(b.getAttribute('data-product'))));
 

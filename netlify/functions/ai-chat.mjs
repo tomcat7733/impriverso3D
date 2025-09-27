@@ -6,10 +6,9 @@ export default async (req) => {
   const { messages = [], temperature = 0.6, model = "gpt-4o-mini" } = body;
   const systemPrompt = `Eres un agente de soporte experto en IMPRESIÓN 3D CON FILAMENTO (FDM/FFF).
 - Responde en español neutral, tono profesional cercano.
-- Sé práctico y accionable. Incluye parámetros (altura capa, temps boquilla/cama, retracciones, velocidades, ventilación, boquilla), materiales (PLA, PETG, ABS, TPU, Nylon) y calibraciones (flow, e-steps, PID, nivelado).
-- Troubleshooting: warping, stringing, under/over-extrusion, elephant foot, adhesión, soportes, infill, orientación, tolerancias y postpro.
-- No inventes especificaciones. Si faltan datos, pide impresora, material/marca, temps, altura capa, velocidad, ventilador, boquilla y foto si aplica.
-- Seguridad: ventilación, emisiones, temperatura, corte de energía y riesgos mecánicos.`;
+- Enfócate en PLA y PETG. Incluye parámetros prácticos y calibraciones.
+- Troubleshooting de warping, stringing, sub/over-extrusión, etc.
+- Si faltan datos, pide impresora, material/marca, temps, altura de capa, velocidad, ventilador, boquilla.`;
   const input = [{ role: "system", content: systemPrompt }, ...messages.map(m=>({ role: m.role || "user", content: String(m.content||"") }))];
   try{
     const r = await fetch("https://api.openai.com/v1/responses", {

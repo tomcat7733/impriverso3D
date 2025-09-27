@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Impriverso3D | Servicio de Impresión 3D profesional</title>
-  <meta name="description" content="Impriverso3D: impresión 3D profesional en España. FDM y resina, prototipos y series cortas.">
+  <title>Impriverso3D | Impresión 3D en PLA y PETG</title>
+  <meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Prototipos y series cortas (FDM).">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
   <link rel="manifest" href="manifest.json"/>
   <meta name="theme-color" content="#0b6b6b"/>
-  <link rel="stylesheet" href="style.css?v=3.0"/>
+  <link rel="stylesheet" href="style.css?v=3.3"/>
   <script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
   <script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
   <script src="https://unpkg.com/three@0.158.0/examples/js/loaders/STLLoader.js"></script>
@@ -38,15 +38,15 @@
   <section class="hero">
     <div class="container hero-grid">
       <div>
-        <h1 data-i18n="hero_title">Impresión 3D profesional</h1>
-        <p class="sub" data-i18n="hero_desc">Servicio integral de diseño y fabricación aditiva. FDM y resina, prototipos, series cortas y piezas funcionales.</p>
+        <h1 data-i18n="hero_title">Impresión 3D en PLA y PETG</h1>
+        <p class="sub" data-i18n="hero_desc">Servicio profesional (FDM) con PLA y PETG. Prototipos, series cortas y piezas funcionales.</p>
         <div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px">
           <a href="#presupuesto" class="btn primary" data-i18n="hero_cta1">Calcular precio</a>
           <a href="#contacto" class="btn ghost" data-i18n="hero_cta2">Presupuesto personalizado</a>
         </div>
         <ul class="kpis">
-          <li data-i18n="badges">PLA · PETG · ABS · ASA · NYLON · TPU</li>
-          <li>FDM y Resina</li>
+          <li data-i18n="badges">PLA · PETG</li>
+          <li>FDM</li>
           <li>Entrega 48–72h</li>
         </ul>
       </div>
@@ -87,7 +87,8 @@
           <div class="field">
             <label>Material</label>
             <select class="select" id="material">
-              <option>PLA</option><option>PETG</option><option>ABS</option><option>ASA</option><option>TPU</option>
+              <option>PLA</option>
+              <option>PETG</option>
             </select>
           </div>
           <div class="field">
@@ -129,9 +130,9 @@
       <h2 data-i18n="pricing_title">Packs estándar</h2>
       <p class="sub" data-i18n="pricing_desc">Compra directa con Stripe. Para piezas a medida, usa el cotizador.</p>
       <div class="cards">
-        <article class="card"><h3 data-i18n="p1">Proto Pack</h3><p data-i18n="p1_desc">Prototipo FDM básico, ≤120mm, PLA, 0.2mm capa.</p><button class="btn primary" data-product="proto" data-i18n="buy">Comprar</button></article>
-        <article class="card"><h3 data-i18n="p2">Resina Premium</h3><p data-i18n="p2_desc">Alta resolución, ≤80mm, resina, postpro premium.</p><button class="btn primary" data-product="resina" data-i18n="buy">Comprar</button></article>
-        <article class="card"><h3 data-i18n="p3">Express 48h</h3><p data-i18n="p3_desc">Cola prioritaria, FDM rápido, ≤100mm, PLA/PETG.</p><button class="btn primary" data-product="express" data-i18n="buy">Comprar</button></article>
+        <article class="card"><h3>PLA Proto</h3><p>Prototipo PLA, ≤120mm, 0.2mm capa.</p><button class="btn primary" data-product="pla" data-i18n="buy">Comprar</button></article>
+        <article class="card"><h3>PETG Pro</h3><p>Alta resistencia, ≤100mm, PETG, buena adhesión térmica.</p><button class="btn primary" data-product="petg" data-i18n="buy">Comprar</button></article>
+        <article class="card"><h3>Express 48h</h3><p>Cola prioritaria, FDM rápido, ≤100mm (PLA/PETG).</p><button class="btn primary" data-product="express" data-i18n="buy">Comprar</button></article>
       </div>
     </div>
   </section>
@@ -188,6 +189,6 @@
 
   <a class="wa-fab" href="https://wa.me/34123456789" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
 
-  <script src="script.js?v=3.0"></script>
+  <script src="script.js?v=3.3"></script>
 </body>
 </html>
