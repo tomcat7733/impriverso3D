@@ -1,0 +1,14 @@
+name: Refresh IG Token
+on:
+  schedule:
+    - cron: '0 7 1,20 * *'
+  workflow_dispatch:
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Call refresh endpoint
+        run: >
+          curl -sS -X POST
+          -H "x-refresh-secret: ${{ secrets.IG_REFRESH_SECRET }}"
+          "https://impriverso3d.netlify.app/api/instagram-refresh"

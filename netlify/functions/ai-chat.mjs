@@ -1,6 +1,6 @@
 export default async (req) => {
   if (req.method !== "POST") return new Response(JSON.stringify({ error: "Method not allowed" }), { status: 405 });
-  const OPENAI_API_KEY = (globalThis.Netlify?.env?.get?.("OPENAI_API_KEY")) ?? process.env.OPENAI_API_KEY;
+  const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
   if (!OPENAI_API_KEY) return new Response(JSON.stringify({ error: "Missing OPENAI_API_KEY" }), { status: 500 });
   let body; try{ body = await req.json(); } catch { return new Response(JSON.stringify({ error: "Invalid JSON" }), { status: 400 }); }
   const { messages = [], temperature = 0.6, model = "gpt-4o-mini" } = body;

@@ -3,8 +3,8 @@
   "short_name": "Impriverso3D",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0b0d10",
-  "theme_color": "#0b0d10",
+  "background_color": "#ffffff",
+  "theme_color": "#0b6b6b",
   "icons": [
     {
       "src": "assets/logo.svg",

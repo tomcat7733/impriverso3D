@@ -3,7 +3,9 @@
   "private": true,
   "scripts": {
     "dev": "netlify dev",
-    "build": "echo 'Static site - nothing to build'",
-    "start": "netlify dev"
+    "build": "echo 'Static site'"
+  },
+  "dependencies": {
+    "@netlify/blobs": "^6.0.0"
   }
 }
