@@ -2,36 +2,15 @@
 [build]
   functions = "netlify/functions"
   publish = "."
-
 [functions]
   node_bundler = "esbuild"
-
 [[redirects]]
-  from = "/api/ai-chat"
-  to = "/.netlify/functions/ai-chat"
+  from = "/api/site-config"
+  to = "/.netlify/functions/site-config"
   status = 200
   force = true
-
 [[redirects]]
   from = "/api/youtube-latest"
   to = "/.netlify/functions/youtube-latest"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/instagram-feed"
-  to = "/.netlify/functions/instagram-feed"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/instagram-refresh"
-  to = "/.netlify/functions/instagram-refresh"
-  status = 200
-  force = true
-
-[[redirects]]
-  from = "/api/stripe-checkout"
-  to = "/.netlify/functions/stripe-checkout"
   status = 200
   force = true
