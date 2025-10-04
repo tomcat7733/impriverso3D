@@ -11,10 +11,10 @@ img{max-width:100%;display:block}a{color:var(--brand);text-decoration:none}.lead
   --radius:16px; --shadow:0 8px 30px rgba(2,25,39,.08);
 
   /* === Mesh Gradient tokens (nuevo / suavizado) === */
-  --y-100:#d3d3d2;  /* amarillo muy claro */
-  --y-200:#cfc498;  /* backup, un poco más vivo */
-  --g-50:#F7F8FA;   /* gris muy claro */
-  --g-100:#F3F4F6;  /* gris claro */
+  --y-100:#faedc2;  /* amarillo muy claro */
+  --y-200:#faedc2;  /* backup, un poco más vivo */
+  --g-50:#faedc2;   /* gris muy claro */
+  --g-100:#faedc2;  /* gris claro */
   --teal:#00bcd4;   /* acento sutil */
   --o1:.65; --o2:.35; --o3:.18; --o4:.10; /* opacidades */
 }
