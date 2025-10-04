@@ -23,6 +23,14 @@
   --bg:#fff; --text:#0a1117; --muted:#51606f; --line:#e6edf3;
   --brand:#0b6b6b; --brand2:#00bcd4; --card:#f7fafc;
   --radius:16px; --shadow:0 8px 30px rgba(2,25,39,.08);
+
+  /* === Mesh Gradient tokens (nuevo / suavizado) === */
+  --y-100:#d3d3d2;  /* amarillo muy claro */
+  --y-200:#cfc498;  /* backup, un poco más vivo */
+  --g-50:#F7F8FA;   /* gris muy claro */
+  --g-100:#F3F4F6;  /* gris claro */
+  --teal:#00bcd4;   /* acento sutil */
+  --o1:.65; --o2:.35; --o3:.18; --o4:.10; /* opacidades */
 }
 *{ box-sizing:border-box }
 html,body{ margin:0; padding:0 }
@@ -43,6 +51,38 @@ a{ color:var(--brand); text-decoration:none }
 .wrap{ max-width:1100px; margin:0 auto; padding:0 18px }
 .section{ padding:56px 0; border-bottom:1px solid var(--line) }
 .section.alt{ background:#fbfeff }
+
+/* 3.1) Mesh Gradient (estático opcional) */
+.section.alt.alt--mesh{
+  background:
+    radial-gradient(36rem 28rem at 10% 10%, rgba(255,249,214,var(--o2)) 0%, rgba(255,249,214,0) 60%),
+    radial-gradient(28rem 24rem at 85% 15%, rgba(0,188,212,var(--o1)) 0%, rgba(0,188,212,0) 55%),
+    radial-gradient(40rem 28rem at 70% 85%, rgba(243,244,246,.9) 0%, rgba(243,244,246,0) 55%),
+    linear-gradient(180deg, var(--y-100) 0%, var(--g-100) 100%);
+  background-blend-mode: soft-light, screen, normal, normal;
+}
+
+/* 3.2) Mesh Gradient ANIMADO (suave + “blur wash”) */
+.section.alt.alt--mesh-anim{
+  background:
+    /* velo blanco para efecto “blur/desaturado” */
+    linear-gradient(0deg, rgba(255,255,255,.36), rgba(255,255,255,.36)),
+    /* manchas orgánicas muy suaves */
+    radial-gradient(42rem 34rem at var(--x1,12%) var(--y1,14%), rgba(255,249,214,var(--o2)) 0%, rgba(255,249,214,0) 60%),
+    radial-gradient(34rem 28rem at var(--x2,80%) var(--y2,18%), rgba(0,188,212,var(--o1)) 0%, rgba(0,188,212,0) 55%),
+    radial-gradient(48rem 32rem at 70% 85%, rgba(243,244,246,.9) 0%, rgba(243,244,246,0) 55%),
+    /* base */
+    linear-gradient(180deg, var(--y-100) 0%, var(--g-100) 100%);
+  background-blend-mode: normal, soft-light, screen, normal, normal;
+  animation: meshFloat 18s ease-in-out infinite alternate;
+}
+@keyframes meshFloat{
+  0%   { --x1:10%; --y1:12%; --x2:82%; --y2:16%; }
+  100% { --x1:16%; --y1:18%; --x2:78%; --y2:22%; }
+}
+@media (prefers-reduced-motion: reduce){
+  .section.alt.alt--mesh-anim{ animation:none }
+}
 
 /* 4) Header & Nav */
 .site-header{
