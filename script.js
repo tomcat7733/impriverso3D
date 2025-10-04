@@ -1,24 +1,54 @@
-if('serviceWorker'in navigator){window.addEventListener('load',()=>navigator.serviceWorker.register('/sw.js').catch(console.warn));}
-document.getElementById('year').textContent=new Date().getFullYear();
-const navToggle=document.getElementById('navToggle'),nav=document.getElementById('nav');navToggle?.addEventListener('click',()=>nav.classList.toggle('show'));
-const I18N={current:localStorage.getItem('lang')||'es',data:{}};async function loadI18n(lang){try{const r=await fetch(`/assets/i18n/${lang}.json`);I18N.data=await r.json();I18N.current=lang;localStorage.setItem('lang',lang);applyI18n();}catch(e){}}function applyI18n(){document.querySelectorAll('[data-i18n]').forEach(el=>{const k=el.getAttribute('data-i18n');if(I18N.data[k])el.textContent=I18N.data[k];});document.querySelectorAll('[data-i18n-placeholder]').forEach(el=>{const k=el.getAttribute('data-i18n-placeholder');if(I18N.data[k])el.setAttribute('placeholder',I18N.data[k]);});}
-document.getElementById('langToggle')?.addEventListener('click',()=>loadI18n(I18N.current==='es'?'en':'es'));loadI18n(I18N.current);
-const size=document.getElementById('size'),sizeVal=document.getElementById('sizeVal'),infill=document.getElementById('infill'),infillVal=document.getElementById('infillVal'),material=document.getElementById('material'),finish=document.getElementById('finish'),priceEl=document.getElementById('price');
-function calcPrice(){const s=Number(size.value),d=Number(infill.value),mat=material.value,fin=finish.value;const k={PLA:1.0,PETG:1.2}[mat]||1.0;const finK=fin==='premium'?1.35:1;let base=Math.pow(s,2)*(0.08+d/300)*k*finK;const price=Math.max(12,Math.round(base));priceEl.textContent=String(price);localStorage.setItem('impriverso_cfg',JSON.stringify({s,d,mat,fin,price}));return price;}
-[size,infill,material,finish].forEach(el=>el?.addEventListener('input',()=>{sizeVal.textContent=size.value;infillVal.textContent=infill.value;calcPrice();}));sizeVal.textContent=size.value;infillVal.textContent=infill.value;calcPrice();
-document.getElementById('addToQuote')?.addEventListener('click',()=>{const p=calcPrice();alert('Añadido. Estimación €'+p+'. Completa el formulario.');});
-const configSnapshot=document.getElementById('configSnapshot');document.querySelector('form[name="contact"]')?.addEventListener('submit',()=>{const snap={size_cm:Number(size?.value||0),infill_percent:Number(infill?.value||0),material:material?.value||'PLA',finish:finish?.value||'estandar',estimated_price_eur:Number((priceEl?.textContent||'0').replace(/[^0-9.]/g,''))};if(configSnapshot)configSnapshot.value=JSON.stringify(snap);});
-const canvas=document.getElementById('stlCanvas');try{if(typeof THREE!=='undefined'&&canvas){const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(50,1,0.1,1000);function resize(){const w=canvas.clientWidth,h=canvas.clientHeight||360;renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();}resize();window.addEventListener('resize',resize);camera.position.set(2.2,1.8,2.6);const controls=new THREE.OrbitControls(camera,canvas);controls.enableDamping=true;const dir=new THREE.DirectionalLight(0xffffff,1);dir.position.set(2,2,3);scene.add(dir);scene.add(new THREE.AmbientLight(0xffffff,.5));let mesh=null;const grid=new THREE.GridHelper(6,12,0xcccccc,0xeeeeee);grid.position.y=-0.5;scene.add(grid);function animate(){requestAnimationFrame(animate);controls.update();renderer.render(scene,camera);}animate();function loadSTL(file){const reader=new FileReader();reader.onload=e=>{const loader=new THREE.STLLoader();const geo=loader.parse(e.target.result);geo.computeVertexNormals();const mat=new THREE.MeshStandardMaterial({color:0x5eb7b7,metalness:.1,roughness:.6});if(mesh){scene.remove(mesh);mesh.geometry.dispose();}mesh=new THREE.Mesh(geo,mat);geo.computeBoundingBox();const bb=geo.boundingBox;const maxDim=Math.max(bb.max.x-bb.min.x,bb.max.y-bb.min.y,bb.max.z-bb.min.z);const scale=1.5/maxDim;mesh.scale.setScalar(scale);mesh.position.set(-(bb.min.x+(bb.max.x-bb.min.x)/2)*scale,-(bb.min.y+(bb.max.y-bb.min.y)/2)*scale,-(bb.min.z+(bb.max.z-bb.min.z)/2)*scale);scene.add(mesh);};reader.readAsArrayBuffer(file);}const input=document.getElementById('stlInput');const drop=document.getElementById('fileDrop');input?.addEventListener('change',e=>{const f=e.target.files?.[0];if(f&&/\.stl$/i.test(f.name))loadSTL(f);else alert('Sube un .stl válido');});drop?.addEventListener('click',()=>input?.click());['dragenter','dragover'].forEach(evt=>drop?.addEventListener(evt,e=>{e.preventDefault();drop.style.borderColor='#0b6b6b'}));['dragleave','drop'].forEach(evt=>drop?.addEventListener(evt,e=>{e.preventDefault();drop.style.borderColor='#b6dada'}));drop?.addEventListener('drop',e=>{const f=e.dataTransfer.files?.[0];if(f&&/\.stl$/i.test(f.name))loadSTL(f);});}}catch(e){}
-async function setLatestYouTube(){try{const r=await fetch('/api/youtube-latest');const data=await r.json();if(data?.videoId){const f=document.getElementById('ytPlayer2');if(f)f.src='https://www.youtube.com/embed/'+data.videoId+'?rel=0';}}catch(e){}}
-setLatestYouTube();
-async function loadIG(limit=8){try{const r=await fetch('/api/instagram-feed?limit='+limit);const data=await r.json();const grid=document.querySelector('.ig-grid');if(Array.isArray(data?.items)&&grid){grid.innerHTML='';data.items.forEach(p=>{const a=document.createElement('a');a.className='g-item';a.href=p.permalink;a.target='_blank';a.rel='noopener';const img=document.createElement('img');img.src=p.thumbnail_url||p.media_url;img.alt=(p.caption||'Instagram');a.appendChild(img);grid.appendChild(a);});}}catch(e){}}
-loadIG(8);
-async function startCheckout(product){try{const r=await fetch('/api/stripe-checkout',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({product})});const data=await r.json();if(data?.url)window.location.href=data.url;else alert('No se pudo iniciar el pago.');}catch(e){alert('Error iniciando pago');}}
-document.querySelectorAll('[data-product]').forEach(b=>b.addEventListener('click',()=>startCheckout(b.getAttribute('data-product'))));
-const aiFab=document.getElementById('ai-fab'),aiPanel=document.getElementById('ai-panel'),aiClose=document.getElementById('ai-close'),aiForm=document.getElementById('ai-form'),aiInput=document.getElementById('ai-input'),aiMessages=document.getElementById('ai-messages');const aiState=[];
-function aiOpen(){aiPanel.classList.add('show');aiPanel.setAttribute('aria-hidden','false');aiFab.setAttribute('aria-expanded','true');aiInput.focus();}
-function aiCloseFn(){aiPanel.classList.remove('show');aiPanel.setAttribute('aria-hidden','true');aiFab.setAttribute('aria-expanded','false');}
-aiFab?.addEventListener('click',aiOpen);aiClose?.addEventListener('click',aiCloseFn);
-function pushMsg(role,text){const w=document.createElement('div');w.className='ai-msg '+(role==='user'?'ai-user':'ai-bot');const b=document.createElement('div');b.className='ai-bubble';b.textContent=text;w.appendChild(b);aiMessages.appendChild(w);aiMessages.scrollTop=aiMessages.scrollHeight;aiState.push({role,content:text});}
-function setTyping(on){if(on){const w=document.createElement('div');w.className='ai-msg ai-bot ai-typing';const b=document.createElement('div');b.className='ai-bubble';b.textContent='Escribiendo…';w.appendChild(b);w.id='ai-typing';aiMessages.appendChild(w);}else{document.getElementById('ai-typing')?.remove();}aiMessages.scrollTop=aiMessages.scrollHeight;}
-aiForm?.addEventListener('submit',async e=>{e.preventDefault();const q=aiInput.value.trim();if(!q)return;pushMsg('user',q);aiInput.value='';setTyping(true);try{const res=await fetch('/api/ai-chat',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({messages:aiState})});const data=await res.json();setTyping(false);pushMsg('assistant',data?.reply||'No pude procesar tu consulta ahora.');}catch(err){setTyping(false);pushMsg('assistant','Error de red.');}});
+/* Añadir/actualizar en script.js: calcula precio por dimensiones + colores */
+const wmm = document.getElementById('wmm');
+const hmm = document.getElementById('hmm');
+const dmm = document.getElementById('dmm');
+const colorsSel = document.getElementById('colors');
+const materialSel = document.getElementById('material');
+const finishSel = document.getElementById('finish');
+const priceEl = document.getElementById('price');
+
+function calcPriceDims(){
+  const w = Math.max(10, Number(wmm?.value || 0));
+  const h = Math.max(10, Number(hmm?.value || 0));
+  const d = Math.max(1, Number(dmm?.value || 0));
+  const colors = Math.min(4, Math.max(1, Number(colorsSel?.value || 1)));
+  const mat = (materialSel?.value || 'PLA');
+  const fin = (finishSel?.value || 'estandar');
+
+  // Conversión a volumen (cm³): (mm*mm)/100 -> cm² ; mm/10 -> cm
+  const area_cm2 = (w * h) / 100.0;
+  const vol_cm3 = area_cm2 * (d / 10.0);
+
+  // Tarifa base calibrada para que 60×75×2 mm con 2 colores ≈ 2 €
+  const rate_per_cm3 = 0.10;     // €/cm³
+  const base_fee = 0.60;         // € setup
+  const color_fee = 0.20 * (colors - 1); // € por color extra
+  const matK = mat === 'PETG' ? 1.15 : 1.00;
+  const finK = fin === 'premium' ? 1.35 : 1.00;
+
+  let price = (vol_cm3 * rate_per_cm3 * matK) + base_fee + color_fee;
+  price *= finK;
+
+  // Redondeo comercial y mínimos
+  price = Math.max(2, Math.round(price)); // mínimo 2€ y redondeo a entero
+  if (priceEl) priceEl.textContent = String(price);
+
+  // Persistimos para el formulario
+  localStorage.setItem('impriverso_cfg', JSON.stringify({ w, h, d, colors, mat, fin, price }));
+  return price;
+}
+
+[wmm, hmm, dmm, colorsSel, materialSel, finishSel].forEach(el => el?.addEventListener('input', calcPriceDims));
+calcPriceDims();
+
+// Si sigues enviando la instantánea en el form de contacto:
+document.getElementById('configSnapshot')?.closest('form')?.addEventListener('submit', () => {
+  const w = Number(wmm?.value || 0), h = Number(hmm?.value || 0), d = Number(dmm?.value || 0);
+  const colors = Number(colorsSel?.value || 1);
+  const mat = materialSel?.value || 'PLA';
+  const fin = finishSel?.value || 'estandar';
+  const price = Number((priceEl?.textContent || '0').replace(/[^0-9.]/g, ''));
+  const snap = { width_mm: w, height_mm: h, depth_mm: d, colors, material: mat, finish: fin, estimated_price_eur: price };
+  const input = document.getElementById('configSnapshot');
+  if (input) input.value = JSON.stringify(snap);
+});
