@@ -6,7 +6,8 @@
   <title>Impriverso3D | Impresión 3D (PLA y PETG)</title>
   <meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Diseño 3D, presupuestos y soporte técnico.">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="style.css?v=4.0.0"/>
+  <!-- 🔄 bump para cache-busting de CSS -->
+  <link rel="stylesheet" href="style.css?v=4.1.1"/>
 </head>
 <body>
   <!-- Header / Nav -->
@@ -39,6 +40,7 @@
         </div>
       </div>
       <div class="hero-media">
+        <!-- Puedes sustituir este placeholder por tu hero cuando quieras -->
         <div class="ph media-16x9">Imagen/Vídeo hero</div>
       </div>
     </div>
@@ -50,17 +52,52 @@
       <h2>Tipos de fabricación disponibles</h2>
       <div class="grid-3">
         <article class="card">
-          <div class="ph media-4x3"></div>
+          <!-- FDM -->
+          <picture class="media-4x3">
+            <source type="image/webp"
+              srcset="assets/tipos-fdm-640.webp 640w, assets/tipos-fdm-960.webp 960w, assets/tipos-fdm-1200.webp 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw">
+            <img
+              src="assets/tipos-fdm-1200.jpg"
+              srcset="assets/tipos-fdm-640.jpg 640w, assets/tipos-fdm-960.jpg 960w, assets/tipos-fdm-1200.jpg 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw"
+              alt="Impresión 3D FDM en PLA y PETG — Impriverso3D"
+              loading="lazy" decoding="async" width="1200" height="900">
+          </picture>
           <h3>FDM (Filamento)</h3>
           <p>La opción eficiente y versátil para prototipos y piezas funcionales. Tamaños grandes y costes ajustados.</p>
         </article>
+
         <article class="card">
-          <div class="ph media-4x3"></div>
+          <!-- Filamento + retroiluminación -->
+          <picture class="media-4x3">
+            <source type="image/webp"
+              srcset="assets/tipos-retroiluminacion-640.webp 640w, assets/tipos-retroiluminacion-960.webp 960w, assets/tipos-retroiluminacion-1200.webp 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw">
+            <img
+              src="assets/tipos-retroiluminacion-1200.jpg"
+              srcset="assets/tipos-retroiluminacion-640.jpg 640w, assets/tipos-retroiluminacion-960.jpg 960w, assets/tipos-retroiluminacion-1200.jpg 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw"
+              alt="Filamento con retroiluminación — Impriverso3D"
+              loading="lazy" decoding="async" width="1200" height="900">
+          </picture>
           <h3>Filamento y retroiluminación</h3>
           <p>Le añadimos retroiluminación para resaltar detalles y crear efectos visuales.</p>
         </article>
+
         <article class="card">
-          <div class="ph media-4x3"></div>
+          <!-- Filamento + retro + pintado -->
+          <picture class="media-4x3">
+            <source type="image/webp"
+              srcset="assets/tipos-retro-pintado-640.webp 640w, assets/tipos-retro-pintado-960.webp 960w, assets/tipos-retro-pintado-1200.webp 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw">
+            <img
+              src="assets/tipos-retro-pintado-1200.jpg"
+              srcset="assets/tipos-retro-pintado-640.jpg 640w, assets/tipos-retro-pintado-960.jpg 960w, assets/tipos-retro-pintado-1200.jpg 1200w"
+              sizes="(max-width: 900px) 100vw, 33vw"
+              alt="Filamento con retroiluminación y pintado — Impriverso3D"
+              loading="lazy" decoding="async" width="1200" height="900">
+          </picture>
           <h3>Filamento, retroiluminación y pintado</h3>
           <p>Combinamos técnicas para lograr acabados únicos y personalizados.</p>
         </article>
@@ -159,27 +196,26 @@
 
   <!-- YouTube (un único bloque) -->
   <section id="videos" class="section">
-  <div class="wrap">
-    <h2>Vídeos</h2>
-    <p class="lead">Último vídeo de nuestro canal.</p>
+    <div class="wrap">
+      <h2>Vídeos</h2>
+      <p class="lead">Último vídeo de nuestro canal.</p>
 
-    <div class="media-16x9 iframe-wrap">
-      <iframe
-        id="ytPlayer"
-        src="about:blank"
-        title="Impriverso3D YouTube"
-        loading="lazy"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        allowfullscreen></iframe>
+      <div class="media-16x9 iframe-wrap">
+        <iframe
+          id="ytPlayer"
+          src="about:blank"
+          title="Impriverso3D YouTube"
+          loading="lazy"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen></iframe>
+      </div>
+
+      <p class="center small">
+        <a target="_blank" rel="noopener" href="https://www.youtube.com/@Impriverso3D">Visitar el canal</a>
+      </p>
     </div>
-
-    <p class="center small">
-      <a target="_blank" rel="noopener" href="https://www.youtube.com/@Impriverso3D">Visitar el canal</a>
-    </p>
-  </div>
   </section>
-
 
   <!-- Otros servicios -->
   <section id="otros" class="section alt">
