@@ -6,16 +6,11 @@
   <title>Impriverso3D | Impresión 3D (PLA y PETG)</title>
   <meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Diseño 3D, presupuestos y soporte técnico.">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="style.css?v=4.3.0"/>
+  <link rel="stylesheet" href="style.css?v=4.3.3"/>
 </head>
 <body>
-  <!-- Fondo global: vídeo desenfocado -->
-  <div class="site-bg" aria-hidden="true">
-    <video id="bgVideo" class="bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg">
-      <source src="assets/hero.webm" type="video/webm">
-      <source src="assets/hero.mp4" type="video/mp4">
-    </video>
-    <img class="bg-poster" src="assets/hero-poster.jpg" alt="" />
+  <!-- Fondo global estático (sin vídeo) -->
+  <div class="site-bg bg-static" aria-hidden="true">
     <div class="bg-overlay"></div>
   </div>
 
@@ -38,7 +33,7 @@
     </div>
   </header>
 
-  <!-- Hero con vídeo local -->
+  <!-- Hero (mantiene video con póster; puedes quitar el <video> si lo quieres estático también) -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -62,34 +57,31 @@
     </div>
   </section>
 
-  <!-- Tipos de fabricación -->
+  <!-- Tipos de fabricación (con imágenes reales) -->
   <section id="tipos" class="section">
     <div class="wrap">
       <h2>Tipos de fabricación disponibles</h2>
       <div class="grid-3">
         <article class="card">
-          <picture class="media-4x3">
-            <source type="image/webp" srcset="assets/tipos-fdm-640.webp 640w, assets/tipos-fdm-960.webp 960w, assets/tipos-fdm-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-            <img src="assets/tipos-fdm-1200.jpg" srcset="assets/tipos-fdm-640.jpg 640w, assets/tipos-fdm-960.jpg 960w, assets/tipos-fdm-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Impresión 3D FDM en PLA y PETG — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-          </picture>
+          <div class="media-4x3">
+            <img src="assets/tipos-fdm.jpg" alt="Impresión 3D FDM en PLA y PETG — Impriverso3D" loading="lazy" decoding="async">
+          </div>
           <h3>FDM (Filamento)</h3>
           <p>La opción eficiente y versátil para prototipos y piezas funcionales. Tamaños grandes y costes ajustados.</p>
         </article>
 
         <article class="card">
-          <picture class="media-4x3">
-            <source type="image/webp" srcset="assets/tipos-retroiluminacion-640.webp 640w, assets/tipos-retroiluminacion-960.webp 960w, assets/tipos-retroiluminacion-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-            <img src="assets/tipos-retroiluminacion-1200.jpg" srcset="assets/tipos-retroiluminacion-640.jpg 640w, assets/tipos-retroiluminacion-960.jpg 960w, assets/tipos-retroiluminacion-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Filamento con retroiluminación — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-          </picture>
+          <div class="media-4x3">
+            <img src="assets/tipos-retroiluminacion.jpg" alt="Filamento con retroiluminación — Impriverso3D" loading="lazy" decoding="async">
+          </div>
           <h3>Filamento y retroiluminación</h3>
           <p>Le añadimos retroiluminación para resaltar detalles y crear efectos visuales.</p>
         </article>
 
         <article class="card">
-          <picture class="media-4x3">
-            <source type="image/webp" srcset="assets/tipos-retro-pintado-640.webp 640w, assets/tipos-retro-pintado-960.webp 960w, assets/tipos-retro-pintado-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-            <img src="assets/tipos-retro-pintado-1200.jpg" srcset="assets/tipos-retro-pintado-640.jpg 640w, assets/tipos-retro-pintado-960.jpg 960w, assets/tipos-retro-pintado-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Filamento con retroiluminación y pintado — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-          </picture>
+          <div class="media-4x3">
+            <img src="assets/tipos-retro-pintado.jpg" alt="Filamento con retroiluminación y pintado — Impriverso3D" loading="lazy" decoding="async">
+          </div>
           <h3>Filamento, retroiluminación y pintado</h3>
           <p>Combinamos técnicas para lograr acabados únicos y personalizados.</p>
         </article>
@@ -105,12 +97,8 @@
       <p class="lead">Trabajamos exclusivamente con <strong>PLA</strong> y <strong>PETG</strong> para maximizar calidad, coste y tiempos.</p>
       <div class="grid-2">
         <article class="spec">
-          <div class="badge-wrap media-16x9 small">
-            <span class="media-badge"></span>
-            <picture class="media-16x9 small">
-              <source type="image/webp" srcset="assets/material-pla-640.webp 640w, assets/material-pla-960.webp 960w, assets/material-pla-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 50vw">
-              <img src="assets/material-pla-1280.jpg" srcset="assets/material-pla-640.jpg 640w, assets/material-pla-960.jpg 960w, assets/material-pla-1280.jpg 1280w" sizes="(max-width: 900px) 100vw, 50vw" alt="Impriverso3D — PLA de alta definición para prototipos y piezas visuales" loading="lazy" decoding="async" width="1280" height="720">
-            </picture>
+          <div class="media-16x9 small">
+            <img src="assets/material-pla.jpg" alt="Impriverso3D — PLA de alta definición para prototipos y piezas visuales" loading="lazy" decoding="async">
           </div>
           <h3>PLA</h3>
           <ul class="ticks">
@@ -120,12 +108,8 @@
           </ul>
         </article>
         <article class="spec">
-          <div class="badge-wrap media-16x9 small">
-            <span class="media-badge"></span>
-            <picture class="media-16x9 small">
-              <source type="image/webp" srcset="assets/material-petg-640.webp 640w, assets/material-petg-960.webp 960w, assets/material-petg-1280.webp 1280w" sizes="(max-width: 900px) 100vw, 50vw">
-              <img src="assets/material-petg-1280.jpg" srcset="assets/material-petg-640.jpg 640w, assets/material-petg-960.jpg 960w, assets/material-petg-1280.jpg 1280w" sizes="(max-width: 900px) 100vw, 50vw" alt="Impriverso3D — PETG resistente para piezas funcionales y uso exigente" loading="lazy" decoding="async" width="1280" height="720">
-            </picture>
+          <div class="media-16x9 small">
+            <img src="assets/material-petg.jpg" alt="Impriverso3D — PETG resistente para piezas funcionales y uso exigente" loading="lazy" decoding="async">
           </div>
           <h3>PETG</h3>
           <ul class="ticks">
@@ -198,22 +182,13 @@
     </div>
   </section>
 
-  <!-- YouTube -->
+  <!-- Vídeos -->
   <section id="videos" class="section">
     <div class="wrap">
       <h2>Vídeos</h2>
       <p class="lead">Último vídeo de nuestro canal.</p>
       <div class="media-16x9 iframe-wrap">
-        <iframe
-          id="ytPlayer"
-          data-channel-id="UClHzwBQlvEPxXcPOFC8bfKw"
-          data-video-id="VjZc9nk2jdg"
-          src="about:blank"
-          title="Impriverso3D YouTube"
-          loading="lazy"
-          referrerpolicy="strict-origin-when-cross-origin"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-          allowfullscreen></iframe>
+        <iframe id="ytPlayer" data-channel-id="UClHzwBQlvEPxXcPOFC8bfKw" data-video-id="VjZc9nk2jdg" src="about:blank" title="Impriverso3D YouTube" loading="lazy" referrerpolicy="strict-origin-when-cross-origin" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
       </div>
       <p class="center small"><a target="_blank" rel="noopener" href="https://www.youtube.com/@Impriverso3D">Visitar el canal</a></p>
     </div>
@@ -225,34 +200,24 @@
       <h2>Otros servicios 3D</h2>
       <div class="grid-3">
         <article class="card">
-          <div class="badge-wrap media-4x3">
-            <span class="media-badge"></span>
-            <picture class="media-4x3">
-              <source type="image/webp" srcset="assets/servicio-diseno-640.webp 640w, assets/servicio-diseno-960.webp 960w, assets/servicio-diseno-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-              <img src="assets/servicio-diseno-1200.jpg" srcset="assets/servicio-diseno-640.jpg 640w, assets/servicio-diseno-960.jpg 960w, assets/servicio-diseno-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Diseño 3D de piezas — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-            </picture>
+          <div class="media-4x3">
+            <img src="assets/servicio-diseno.jpg" alt="Diseño 3D de piezas — Impriverso3D" loading="lazy" decoding="async">
           </div>
           <h3>Diseño 3D</h3>
           <p>Modelado paramétrico y orgánico. De tu idea al STL listo para imprimir, con revisión dimensional.</p>
         </article>
+
         <article class="card">
-          <div class="badge-wrap media-4x3">
-            <span class="media-badge"></span>
-            <picture class="media-4x3">
-              <source type="image/webp" srcset="assets/servicio-asesoria-640.webp 640w, assets/servicio-asesoria-960.webp 960w, assets/servicio-asesoria-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-              <img src="assets/servicio-asesoria-1200.jpg" srcset="assets/servicio-asesoria-640.jpg 640w, assets/servicio-asesoria-960.jpg 960w, assets/servicio-asesoria-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Asesoría técnica: material, color y parámetros — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-            </picture>
+          <div class="media-4x3">
+            <img src="assets/servicio-asesoria.jpg" alt="Asesoría técnica: material, color y parámetros — Impriverso3D" loading="lazy" decoding="async">
           </div>
           <h3>Asesoría técnica</h3>
           <p>Te guiamos en elección de <strong>PLA vs PETG</strong>, colores y tolerancias según uso real.</p>
         </article>
+
         <article class="card">
-          <div class="badge-wrap media-4x3">
-            <span class="media-badge"></span>
-            <picture class="media-4x3">
-              <source type="image/webp" srcset="assets/servicio-final-640.webp 640w, assets/servicio-final-960.webp 960w, assets/servicio-final-1200.webp 1200w" sizes="(max-width: 900px) 100vw, 33vw">
-              <img src="assets/servicio-final-1200.jpg" srcset="assets/servicio-final-640.jpg 640w, assets/servicio-final-960.jpg 960w, assets/servicio-final-1200.jpg 1200w" sizes="(max-width: 900px) 100vw, 33vw" alt="Acabado y entrega: revisión, montaje y packaging — Impriverso3D" loading="lazy" decoding="async" width="1200" height="900">
-            </picture>
+          <div class="media-4x3">
+            <img src="assets/servicio-final.jpg" alt="Acabado y entrega: revisión, montaje y packaging — Impriverso3D" loading="lazy" decoding="async">
           </div>
           <h3>Acabado y entrega</h3>
           <p>QA, limpieza y montaje. Empaquetado seguro y envío 48–72h.</p>
@@ -271,10 +236,7 @@
           <p>Respuesta rápida. Envíame dimensiones, material (PLA/PETG) y cantidad.</p>
           <p><code id="emailText">impriverso3d@gmail.com</code></p>
           <div class="cta-row">
-            <a class="btn primary" id="mailtoBtn"
-               href="mailto:impriverso3d@gmail.com?subject=Presupuesto%20Impriverso3D&body=Hola%2C%20me%20gustar%C3%ADa%20pedir%20presupuesto%20para...">
-              Abrir correo
-            </a>
+            <a class="btn primary" id="mailtoBtn" href="mailto:impriverso3d@gmail.com?subject=Presupuesto%20Impriverso3D&body=Hola%2C%20me%20gustar%C3%ADa%20pedir%20presupuesto%20para...">Abrir correo</a>
             <button class="btn" id="copyEmail">Copiar</button>
           </div>
         </article>
@@ -298,8 +260,6 @@
     </div>
   </footer>
 
-  <!-- JS -->
-  <script src="script.js?v=4.3.0"></script>
-  <script src="scripts/bg-video-helper.js?v=4.3.0"></script>
+  <script src="script.js?v=4.3.3"></script>
 </body>
 </html>

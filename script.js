@@ -1,6 +1,5 @@
-/* Impriverso3D scripts v4.3.0 */
+/* Impriverso3D scripts v4.3.3 */
 (function(){
-  // --- Mobile nav toggle ---
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('mainnav');
   if (toggle && nav){
@@ -14,7 +13,6 @@
     }));
   }
 
-  // --- Hero video poster fallback ---
   const wrap = document.querySelector('.video-wrap');
   const vid = document.getElementById('heroVideo');
   if (wrap && vid){
@@ -24,29 +22,22 @@
     vid.addEventListener('loadeddata', ready, {once:true});
   }
 
-  // --- Copy email + footer year ---
   const email = 'impriverso3d@gmail.com';
   const copyBtn = document.getElementById('copyEmail');
   if (copyBtn){
     copyBtn.addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(email);
-        copyBtn.textContent='Copiado ✓';
-      }catch{
-        copyBtn.textContent='No se pudo copiar';
-      }
+      try{ await navigator.clipboard.writeText(email); copyBtn.textContent='Copiado ✓'; }
+      catch{ copyBtn.textContent='No se pudo copiar'; }
       setTimeout(()=>copyBtn.textContent='Copiar', 1800);
     });
   }
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // --- YouTube embed robusto: API -> playlist uploads -> fallback fijo ---
   const yt = document.getElementById('ytPlayer');
   if (yt){
     const fallbackId = yt.getAttribute('data-video-id') || 'VjZc9nk2jdg';
     const channelId  = yt.getAttribute('data-channel-id');
-
     const buildSingle  = (id) => `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
     const buildUploads = (cid) => {
       if (!cid || !/^UC/.test(cid)) return null;
@@ -54,7 +45,6 @@
       return `https://www.youtube.com/embed/videoseries?list=${uploads}&rel=0&modestbranding=1&playsinline=1`;
     };
     const setSrc = (url) => { yt.src = url; };
-
     let set = false;
     fetch('/api/youtube-latest?t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.ok ? r.json() : Promise.reject())
