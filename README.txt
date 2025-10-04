@@ -1,11 +1,19 @@
-Impriverso3D — Responsive Patch v4.2.0
-Archivos incluidos:
-- index.html (header responsive + hero video)
-- style.css (video-wrap + mobile nav)
-- script.js (toggle, video ready, copiar email, year)
-- netlify.toml (cache + headers de seguridad)
+Impriverso3D — Full Build v4.3.0
 
-Cómo aplicar:
-1) Copia estos archivos a la raíz de tu proyecto (sobrescribe).
-2) Asegúrate de tener en /assets/: hero.mp4 / hero.webm / hero-poster.jpg
-3) Deploy en Netlify y Hard Reload (Ctrl/Cmd+Shift+R).
+Incluye:
+- index.html (con fondo de vídeo global, hero, secciones, YouTube robusto y contacto sin backend)
+- style.css (responsive, imágenes sin stretch, menú móvil vertical, hero gutters, fondo de vídeo)
+- script.js (nav, hero, copiar email, YouTube dinámico + fallbacks)
+- scripts/bg-video-helper.js (autoplay + fallbacks y accesibilidad)
+- netlify.toml (cache + headers de seguridad)
+- assets/logo.svg (placeholder)
+
+Requisitos de assets (añádelos tú en /assets/):
+- hero.mp4 / hero.webm / hero-poster.jpg
+- tipos-fdm-*.jpg/.webp, tipos-retroiluminacion-*.jpg/.webp, tipos-retro-pintado-*.jpg/.webp
+- material-pla-*.jpg/.webp, material-petg-*.jpg/.webp
+- servicio-diseno-*.jpg/.webp, servicio-asesoria-*.jpg/.webp, servicio-final-*.jpg/.webp
+
+Deploy:
+1) Sube TODO a Netlify (o tu hosting). 
+2) Hard reload tras el deploy (Ctrl/Cmd+Shift+R) para romper caché.

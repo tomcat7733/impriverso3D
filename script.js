@@ -1,6 +1,5 @@
-/* Impriverso3D scripts v4.2.5 */
+/* Impriverso3D scripts v4.3.3 */
 (function(){
-  // --- Mobile nav toggle ---
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('mainnav');
   if (toggle && nav){
@@ -14,7 +13,6 @@
     }));
   }
 
-  // --- Hero video poster fallback ---
   const wrap = document.querySelector('.video-wrap');
   const vid = document.getElementById('heroVideo');
   if (wrap && vid){
@@ -24,17 +22,12 @@
     vid.addEventListener('loadeddata', ready, {once:true});
   }
 
-  // --- Copy email + footer year ---
   const email = 'impriverso3d@gmail.com';
   const copyBtn = document.getElementById('copyEmail');
   if (copyBtn){
     copyBtn.addEventListener('click', async () => {
-      try{
-        await navigator.clipboard.writeText(email);
-        copyBtn.textContent='Copiado ✓';
-      }catch{
-        copyBtn.textContent='No se pudo copiar';
-      }
+      try{ await navigator.clipboard.writeText(email); copyBtn.textContent='Copiado ✓'; }
+      catch{ copyBtn.textContent='No se pudo copiar'; }
       setTimeout(()=>copyBtn.textContent='Copiar', 1800);
     });
   }
