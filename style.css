@@ -1,10 +1,11 @@
 /* =========================================================
-   Impriverso3D · styles (v4.2.2)
+   Impriverso3D · styles (v4.2.3)
    Estructura:
    1) Variables & Reset
    2) Base & Utilidades
    3) Layout global
    4) Header & Nav
+      4.1) Header tint opcional (mesh)
    5) Botones
    6) Hero
    7) Sistema de Media (aspect-ratio, picture, iframe, badges, video)
@@ -16,6 +17,7 @@
   12) Footer
   13) Responsive
   14) Extras Contacto
+  15) Fondos avanzados (Mesh: estático/animado)
    ========================================================= */
 
 /* 1) Variables & Reset */
@@ -23,6 +25,13 @@
   --bg:#fff; --text:#0a1117; --muted:#51606f; --line:#e6edf3;
   --brand:#0b6b6b; --brand2:#00bcd4; --card:#f7fafc;
   --radius:16px; --shadow:0 8px 30px rgba(2,25,39,.08);
+
+  /* Mesh palette (suave) */
+  --mesh-y-100:#fffaf0;   /* amarillo muy claro, “butter” */
+  --mesh-g-100:#f5f7fb;   /* gris blanquecino de base */
+  --mesh-c-100:#ffdbdb;   /* cian brand */
+  --mesh-o1:.16;          /* opacidad cian */
+  --mesh-o2:.18;          /* opacidad amarillo */
 }
 *{ box-sizing:border-box }
 html,body{ margin:0; padding:0 }
@@ -36,7 +45,7 @@ img{ max-width:100%; display:block }
 a{ color:var(--brand); text-decoration:none }
 .lead{ color:var(--muted) }
 .center{ text-align:center }
-.small{ font-size:14px; color:#51606f } /* solo texto pequeño */
+.small{ font-size:14px; color:#51606f }
 .hidden{ display:none }
 
 /* 3) Layout global */
@@ -64,6 +73,17 @@ a{ color:var(--brand); text-decoration:none }
   line-height:1; padding:6px 8px; border-radius:10px; cursor:pointer;
 }
 
+/* 4.1) Header tint opcional (mesh) */
+.site-header.header--mesh{
+  background:
+    radial-gradient(20rem 16rem at 8% 18%, rgba(255,242,173,var(--mesh-o2)) 0%, rgba(255,242,173,0) 60%),
+    radial-gradient(16rem 12rem at 92% 22%, rgba(0,188,212,var(--mesh-o1)) 0%, rgba(0,188,212,0) 55%),
+    rgba(255,255,255,.86);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+}
+
 /* 5) Botones */
 .btn{
   display:inline-flex; align-items:center; gap:8px;
@@ -89,16 +109,9 @@ a{ color:var(--brand); text-decoration:none }
   background:#eef4f8; border:2px dashed #cfe0ea; border-radius:12px;
   color:#7a8a99; font-size:14px;
 }
-
-/* --- Hero comfy gutters & text width --- */
-.hero .wrap{
-  padding-left: 24px;
-  padding-right: 24px;     /* más aire que el resto solo en hero */
-}
-.hero-copy{
-  padding-left: 8px;       /* micro sangría para que no “pegue” al borde */
-  max-width: 640px;        /* limita el ancho de lectura del H1 + lead */
-}
+/* Hero comfy gutters & text width */
+.hero .wrap{ padding-left:24px; padding-right:24px }
+.hero-copy{ padding-left:8px; max-width:640px }
 @media (max-width:900px){
   .hero .wrap{ padding-left:18px; padding-right:18px }
   .hero-copy{ padding-left:6px; padding-right:6px }
@@ -109,26 +122,21 @@ a{ color:var(--brand); text-decoration:none }
 .media-4x3 { aspect-ratio:4/3 }
 .media-1x1 { aspect-ratio:1/1 }
 
-/* Los contenedores media llevan borde y radio por defecto */
+/* contenedores media con borde y radio */
 .media-16x9, .media-4x3, .media-1x1{
   position:relative; overflow:hidden;
   border-radius:12px; border:1px solid var(--line);
 }
-
-/* Imagen dentro de media: llenado sin deformar (crop si hace falta) */
 picture{ display:block }
 .media-16x9 img,
 .media-4x3 img,
 .media-1x1 img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
+  position:absolute; inset:0; width:100%; height:100%;
   object-fit:cover; display:block; border:0;
 }
-
-/* Si quieres altura mínima solo cuando .small acompaña a un media */
 .media-16x9.small, .media-4x3.small, .media-1x1.small{ min-height:120px }
 
-/* Badges sobre la imagen (si se usan) */
+/* badges */
 .badge-wrap{ position:relative }
 .media-badge{
   position:absolute; top:10px; left:10px; z-index:2;
@@ -147,7 +155,7 @@ picture{ display:block }
   display:block; border:0;
 }
 
-/* Vídeo del hero en full-bleed */
+/* Vídeo del hero */
 .video-wrap{
   position:relative; overflow:hidden; border-radius:12px;
   border:1px solid var(--line); background:#000;
@@ -164,12 +172,12 @@ picture{ display:block }
 .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
 
 /* 8.1) Separación bloques Detalles (#detalles) */
-#detalles .grid-3 + .grid-2.push{ margin-top:24px }        /* default */
+#detalles .grid-3 + .grid-2.push{ margin-top:24px }
 @media (min-width:1100px){
-  #detalles .grid-3 + .grid-2.push{ margin-top:28px }      /* desktop grande */
+  #detalles .grid-3 + .grid-2.push{ margin-top:28px }
 }
 @media (max-width:900px){
-  #detalles .grid-3 + .grid-2.push{ margin-top:18px }      /* móvil compacto */
+  #detalles .grid-3 + .grid-2.push{ margin-top:18px }
 }
 
 /* 9) Superficies */
@@ -227,49 +235,45 @@ picture{ display:block }
 }
 #contacto .panel .cta-row{ gap:8px }
 
-/* --- Mobile nav: vertical, limpio y full-width --- */
+/* --- Mobile nav vertical limpio --- */
 @media (max-width:900px){
-  /* contenedor del menú cuando se abre */
   .nav{
-    /* ya controlamos el display con .is-open desde JS */
-    flex-direction: column;      /* 🔥 vertical */
-    align-items: stretch;        /* que cada item ocupe todo el ancho */
-    width: 100%;
-    gap: 0;                      /* sin huecos entre items */
-    padding: 4px;
-    margin-top: 8px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: var(--shadow);
-    z-index: 60;                 /* por encima del contenido */
+    flex-direction: column; align-items: stretch; width: 100%;
+    gap: 0; padding: 4px; margin-top: 8px; border: 1px solid var(--line);
+    border-radius: 12px; background: #fff; box-shadow: var(--shadow); z-index: 60;
   }
+  .nav a{ display:block; padding:14px 12px; font-size:16px; line-height:1.2 }
+  .nav a + a{ border-top:1px solid var(--line) }
+  .nav .btn.primary{ width:100%; justify-content:center; margin-top:6px; border-top:0 }
+  .nav a:active, .nav a:focus-visible{ background:#eef6f6; outline:none }
+}
 
-  /* links como bloques, con alto de toque cómodo */
-  .nav a{
-    display: block;
-    padding: 14px 12px;          /* >=44px área táctil approx */
-    font-size: 16px;
-    line-height: 1.2;
-  }
+/* 15) Fondos avanzados (Mesh: estático y animado) */
+.section.alt.alt--mesh,
+.hero.alt--mesh{
+  background:
+    radial-gradient(36rem 28rem at 10% 12%, rgba(255,242,173,var(--mesh-o2)) 0%, rgba(255,242,173,0) 60%),
+    radial-gradient(28rem 24rem at 82% 16%, rgba(0,188,212,var(--mesh-o1)) 0%, rgba(0,188,212,0) 55%),
+    linear-gradient(180deg, var(--mesh-y-100) 0%, var(--mesh-g-100) 100%);
+}
 
-  /* separadores entre items */
-  .nav a + a{
-    border-top: 1px solid var(--line);
-  }
+.section.alt.alt--mesh-anim,
+.hero.alt--mesh-anim{
+  background:
+    radial-gradient(36rem 28rem at var(--x1,10%) var(--y1,12%), rgba(255,242,173,var(--mesh-o2)) 0%, rgba(255,242,173,0) 60%),
+    radial-gradient(28rem 24rem at var(--x2,82%) var(--y2,16%), rgba(0,188,212,var(--mesh-o1)) 0%, rgba(0,188,212,0) 55%),
+    linear-gradient(180deg, var(--mesh-y-100) 0%, var(--mesh-g-100) 100%);
+  animation: meshFloat 18s ease-in-out infinite alternate;
+}
 
-  /* CTA "Contacto" destacado: sin separador arriba y a ancho completo */
-  .nav .btn.primary{
-    width: 100%;
-    justify-content: center;
-    margin-top: 6px;
-    border-top: 0;               /* anula el separador */
-  }
+/* Animación suave del mesh */
+@keyframes meshFloat{
+  0%   { --x1:10%; --y1:12%; --x2:82%; --y2:16%; }
+  100% { --x1:16%; --y1:18%; --x2:78%; --y2:22%; }
+}
 
-  /* feedback rápido en tap/focus */
-  .nav a:active,
-  .nav a:focus-visible{
-    background: #eef6f6;
-    outline: none;
-  }
+/* Respeto a reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .section.alt.alt--mesh-anim,
+  .hero.alt--mesh-anim{ animation:none }
 }
