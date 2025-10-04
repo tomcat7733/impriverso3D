@@ -184,3 +184,7 @@ img.media-1x1{
   .grid-3{grid-template-columns:1fr}
   .hero-grid{grid-template-columns:1fr}
 }
+
+/* Contacto sin backend */
+#contacto code{background:#f0f6f8;border:1px solid var(--line);padding:6px 10px;border-radius:8px;display:inline-block}
+#contacto .panel .cta-row{gap:8px}
