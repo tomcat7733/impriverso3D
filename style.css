@@ -1,41 +1,146 @@
+/* =========================================================
+   Impriverso3D · styles (v4.0.2)
+   Estructura:
+   1) Variables & Reset
+   2) Base & Utilidades
+   3) Layout global
+   4) Header & Nav
+   5) Botones
+   6) Hero
+   7) Secciones & Grids
+   8) Superficies (card/panel/spec)
+   9) Listas
+  10) Media (aspect-ratio + iframe full-bleed)
+  11) Formularios
+  12) Footer
+  13) Responsive
+   ========================================================= */
+
+/* 1) Variables & Reset */
 :root{
   --bg:#fff; --text:#0a1117; --muted:#51606f; --line:#e6edf3;
   --brand:#0b6b6b; --brand2:#00bcd4; --card:#f7fafc;
   --radius:16px; --shadow:0 8px 30px rgba(2,25,39,.08);
 }
-*{box-sizing:border-box}html,body{margin:0;padding:0}
-body{font-family:Inter,system-ui,Segoe UI,Roboto,Ubuntu,sans-serif;color:var(--text);background:var(--bg)}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+
+/* 2) Base & Utilidades */
+body{
+  font-family:Inter,system-ui,Segoe UI,Roboto,Ubuntu,sans-serif;
+  color:var(--text); background:var(--bg);
+}
 img{max-width:100%;display:block}
 a{color:var(--brand);text-decoration:none}
+.lead{color:var(--muted)}
+.center{text-align:center}
+.small{font-size:14px;color:#51606f}
+
+/* 3) Layout global */
 .wrap{max-width:1100px;margin:0 auto;padding:0 18px}
-.site-header{position:sticky;top:0;background:rgba(255,255,255,.92);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);z-index:50}
-.site-header .wrap{display:flex;align-items:center;justify-content:space-between;padding:12px 18px}
+.section{padding:56px 0;border-bottom:1px solid var(--line)}
+.section.alt{background:#fbfeff}
+
+/* 4) Header & Nav */
+.site-header{
+  position:sticky; top:0; z-index:50;
+  background:rgba(255,255,255,.92); backdrop-filter:blur(8px);
+  border-bottom:1px solid var(--line);
+}
+.site-header .wrap{
+  display:flex; align-items:center; justify-content:space-between;
+  padding:12px 18px;
+}
 .brand{display:flex;align-items:center;gap:10px;font-weight:800;color:var(--brand)}
 .brand img{width:32px;height:32px}
 .nav{display:flex;gap:12px;align-items:center}
 .nav a{padding:8px 10px;border-radius:10px;color:#153042}
 .nav a:hover{background:#eef6f6}
-.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;border-radius:12px;border:1px solid var(--line);background:#fff;color:#0b3333;cursor:pointer}
-.btn.primary{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border:none;font-weight:700}
+
+/* 5) Botones */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:10px 14px;border-radius:12px;
+  border:1px solid var(--line); background:#fff; color:#0b3333;
+  cursor:pointer;
+}
+.btn.primary{
+  background:linear-gradient(135deg,var(--brand2),var(--brand));
+  color:#fff;border:none;font-weight:700;
+}
 .btn.ghost{background:#eef6f6}
+
+/* 6) Hero */
 .hero{background:linear-gradient(180deg,#ecfbff,#fff);border-bottom:1px solid var(--line)}
-.hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:24px;align-items:center;padding:48px 0}
-.lead{color:var(--muted)}
+.hero-grid{
+  display:grid;grid-template-columns:1.1fr .9fr;
+  gap:24px;align-items:center;padding:48px 0;
+}
 .cta-row{display:flex;gap:10px;margin-top:10px;flex-wrap:wrap}
-.ph{display:grid;place-items:center;background:#eef4f8;border:2px dashed #cfe0ea;border-radius:12px;color:#7a8a99;font-size:14px}
-.media-16x9{aspect-ratio:16/9}.media-4x3{aspect-ratio:4/3}.media-1x1{aspect-ratio:1/1}.small{min-height:120px}
-.section{padding:56px 0;border-bottom:1px solid var(--line)}
-.section.alt{background:#fbfeff}
+.ph{
+  display:grid;place-items:center;
+  background:#eef4f8;border:2px dashed #cfe0ea;border-radius:12px;
+  color:#7a8a99;font-size:14px;
+}
+
+/* 7) Secciones & Grids */
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
-@media(max-width:900px){.grid-2{grid-template-columns:1fr}.grid-3{grid-template-columns:1fr}}
-.card,.panel,.spec{background:#fff;border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+
+/* 8) Superficies (cards/panels/specs) */
+.card,.panel,.spec{
+  background:#fff;border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
+}
 .card.muted{opacity:.6}
-.notice{margin-top:14px;padding:12px;border:1px dashed #b6dada;border-radius:12px;background:#f4fbfb;color:#174242}
+.notice{
+  margin-top:14px;padding:12px;border:1px dashed #b6dada;
+  border-radius:12px;background:#f4fbfb;color:#174242;
+}
+
+/* 9) Listas */
 .bullets{margin:0;padding-left:18px}
 .ticks{margin:0;padding-left:18px}
-.iframe-wrap{border-radius:12px;overflow:hidden;border:1px solid var(--line);background:#000}
-.center{text-align:center}.small{font-size:14px;color:#51606f}
-.input,.select,.textarea{width:100%;padding:10px;border:1px solid var(--line);border-radius:10px;background:#fff;color:#0a1117}
+
+/* 10) Media (aspect-ratio + iframe full-bleed) */
+.media-16x9{aspect-ratio:16/9}
+.media-4x3{aspect-ratio:4/3}
+.media-1x1{aspect-ratio:1/1}
+.small{min-height:120px}
+
+/* Contenedor de vídeo con borde y radio */
+.iframe-wrap,
+.yt-frame{
+  position:relative;
+  overflow:hidden;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#000;
+}
+/* El iframe rellena 100% del contenedor */
+.iframe-wrap iframe,
+.yt-frame iframe{
+  position:absolute;
+  inset:0;            /* top/right/bottom/left = 0 */
+  width:100%;
+  height:100%;
+  display:block;
+  border:0;
+}
+
+/* 11) Formularios */
+.input,.select,.textarea{
+  width:100%;padding:10px;border:1px solid var(--line);
+  border-radius:10px;background:#fff;color:#0a1117;
+}
+
+/* 12) Footer */
 .site-footer{background:#f7fafc}
 .site-footer .wrap{padding:16px 18px;color:#5b6b79}
+
+/* 13) Responsive */
+@media (max-width:900px){
+  .grid-2{grid-template-columns:1fr}
+  .grid-3{grid-template-columns:1fr}
+  .hero-grid{grid-template-columns:1fr}
+}
