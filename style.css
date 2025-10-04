@@ -1,6 +1,5 @@
 /* =========================================================
-   Impriverso3D · styles (v4.1.1)
-   Estructura:
+   Impriverso3D · styles (v4.1.2)
    1) Variables & Reset
    2) Base & Utilidades
    3) Layout global
@@ -8,9 +7,9 @@
    5) Botones
    6) Hero
    7) Secciones & Grids
-   8) Superficies (card/panel/spec)
+   8) Superficies
    9) Listas
-  10) Media (aspect-ratio + imágenes + iframe full-bleed)
+  10) Media (imágenes + iframe + video)
   11) Formularios
   12) Footer
   13) Responsive
@@ -87,7 +86,7 @@ a{color:var(--brand);text-decoration:none}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 
-/* 8) Superficies (cards/panels/specs) */
+/* 8) Superficies */
 .card,.panel,.spec{
   background:#fff;border:1px solid var(--line);
   border-radius:var(--radius);padding:16px;box-shadow:var(--shadow);
@@ -102,7 +101,7 @@ a{color:var(--brand);text-decoration:none}
 .bullets{margin:0;padding-left:18px}
 .ticks{margin:0;padding-left:18px}
 
-/* 10) Media (aspect-ratio + imágenes + iframe full-bleed) */
+/* 10) Media (imágenes + iframe + video) */
 .media-16x9{aspect-ratio:16/9}
 .media-4x3{aspect-ratio:4/3}
 .media-1x1{aspect-ratio:1/1}
@@ -128,7 +127,7 @@ picture.media-1x1{
   object-fit:cover;
 }
 
-/* Si usas <img class="media-*> directamente (sin <picture>) */
+/* <img class="media-*> sin <picture> */
 img.media-16x9,
 img.media-4x3,
 img.media-1x1{
@@ -137,24 +136,36 @@ img.media-1x1{
   object-fit:cover;
 }
 
-/* Contenedor de vídeo con borde y radio */
+/* Iframe YouTube full-bleed */
 .iframe-wrap,
 .yt-frame{
+  position:relative; overflow:hidden;
+  border-radius:12px; border:1px solid var(--line); background:#000;
+}
+.iframe-wrap iframe,
+.yt-frame iframe{
+  position:absolute; inset:0; width:100%; height:100%; display:block; border:0;
+}
+
+/* Vídeo HTML5 en hero (no YouTube) */
+.video-wrap{
   position:relative;
   overflow:hidden;
   border-radius:12px;
   border:1px solid var(--line);
   background:#000;
 }
-/* El iframe rellena 100% del contenedor */
-.iframe-wrap iframe,
-.yt-frame iframe{
-  position:absolute;
-  inset:0;            /* top/right/bottom/left = 0 */
-  width:100%;
-  height:100%;
-  display:block;
-  border:0;
+.video-wrap video{
+  position:absolute; inset:0; width:100%; height:100%;
+  display:block; object-fit:cover; border:0;
+}
+.video-wrap .hero-poster{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; display:none;
+}
+@media (prefers-reduced-motion: reduce){
+  .video-wrap video{ display:none; }
+  .video-wrap .hero-poster{ display:block; }
 }
 
 /* 11) Formularios */

@@ -1,0 +1,10 @@
+# Añade/mergea esto a tu netlify.toml para cachear los vídeos
+[[headers]]
+for = "/assets/*.mp4"
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+for = "/assets/*.webm"
+  [headers.values]
+  Cache-Control = "public, max-age=31536000, immutable"
