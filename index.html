@@ -6,17 +6,17 @@
   <title>Impriverso3D | Impresión 3D (PLA y PETG)</title>
   <meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Diseño 3D, presupuestos y soporte técnico.">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="style.css?v=4.1.2"/>
+  <link rel="stylesheet" href="style.css?v=4.2.0"/>
 </head>
 <body>
-  <!-- Header / Nav -->
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#">
         <img src="assets/logo.svg" alt="Impriverso3D" />
         <span>Impriverso3D</span>
       </a>
-      <nav class="nav">
+      <button class="nav-toggle" aria-controls="mainnav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      <nav id="mainnav" class="nav">
         <a href="#tipos">Impresión 3D</a>
         <a href="#materiales">Materiales</a>
         <a href="#presupuesto">Presupuesto</a>
@@ -27,7 +27,6 @@
     </div>
   </header>
 
-  <!-- Hero con vídeo local -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -51,7 +50,6 @@
     </div>
   </section>
 
-  <!-- Tipos de fabricación -->
   <section id="tipos" class="section">
     <div class="wrap">
       <h2>Tipos de fabricación disponibles</h2>
@@ -87,7 +85,6 @@
     </div>
   </section>
 
-  <!-- Materiales -->
   <section id="materiales" class="section alt">
     <div class="wrap">
       <h2>Materiales de impresión 3D</h2>
@@ -127,7 +124,6 @@
     </div>
   </section>
 
-  <!-- Presupuesto -->
   <section id="presupuesto" class="section">
     <div class="wrap">
       <h2>Presupuesto</h2>
@@ -146,7 +142,6 @@
     </div>
   </section>
 
-  <!-- Detalles -->
   <section id="detalles" class="section alt">
     <div class="wrap">
       <h2>Detalles técnicos</h2>
@@ -187,7 +182,6 @@
     </div>
   </section>
 
-  <!-- Vídeos -->
   <section id="videos" class="section">
     <div class="wrap">
       <h2>Vídeos</h2>
@@ -199,12 +193,10 @@
     </div>
   </section>
 
-  <!-- Otros servicios (ACTUALIZADO) -->
   <section id="otros" class="section alt">
     <div class="wrap">
       <h2>Otros servicios 3D</h2>
       <div class="grid-3">
-        <!-- Diseño 3D -->
         <article class="card">
           <div class="badge-wrap media-4x3">
             <span class="media-badge"></span>
@@ -216,8 +208,6 @@
           <h3>Diseño 3D</h3>
           <p>Modelado paramétrico y orgánico. De tu idea al STL listo para imprimir, con revisión dimensional.</p>
         </article>
-
-        <!-- Asesoría técnica -->
         <article class="card">
           <div class="badge-wrap media-4x3">
             <span class="media-badge"></span>
@@ -229,8 +219,6 @@
           <h3>Asesoría técnica</h3>
           <p>Te guiamos en elección de <strong>PLA vs PETG</strong>, colores y tolerancias según uso real.</p>
         </article>
- 
-        <!-- Al final -->
         <article class="card">
           <div class="badge-wrap media-4x3">
             <span class="media-badge"></span>
@@ -246,12 +234,10 @@
     </div>
   </section>
 
-  <!-- Contacto (SIN BACKEND) -->
   <section id="contacto" class="section">
     <div class="wrap">
       <h2>Contacto</h2>
       <div class="grid-3">
-        <!-- Email -->
         <article class="panel">
           <h3>Correo</h3>
           <p>Respuesta rápida. Envíame dimensiones, material (PLA/PETG) y cantidad.</p>
@@ -264,25 +250,15 @@
             <button class="btn" id="copyEmail">Copiar</button>
           </div>
         </article>
-
-        <!-- Instagram -->
         <article class="panel">
           <h3>Instagram</h3>
           <p>DMs abiertos para dudas rápidas y seguimiento de pedidos.</p>
-          <a class="btn primary" target="_blank" rel="noopener"
-             href="https://www.instagram.com/impriverso3d/">
-            Enviar DM
-          </a>
+          <a class="btn primary" target="_blank" rel="noopener" href="https://www.instagram.com/impriverso3d/">Enviar DM</a>
         </article>
-
-        <!-- Wallapop -->
         <article class="panel">
           <h3>Wallapop</h3>
           <p>Habla conmigo por Wallapop para productos listos o a medida.</p>
-          <a class="btn primary" target="_blank" rel="noopener"
-             href="https://es.wallapop.com/user/raulg-72063226">
-            Abrir Wallapop
-          </a>
+          <a class="btn primary" target="_blank" rel="noopener" href="https://es.wallapop.com/user/raulg-72063226">Abrir Wallapop</a>
         </article>
       </div>
     </div>
@@ -294,27 +270,6 @@
     </div>
   </footer>
 
-  <!-- JS -->
-  <script src="script.js?v=4.0.0"></script>
-  <script src="scripts/hero-video-helper.js?v=4.1.2"></script>
-  <script>
-    // utilidades pequeñas sin backend
-    (function(){
-      const email = 'impriverso3d@gmail.com'; // <-- cámbialo si procede
-      const copyBtn = document.getElementById('copyEmail');
-      const emailEl = document.getElementById('emailText');
-      const mailtoBtn = document.getElementById('mailtoBtn');
-      if (copyBtn && emailEl) {
-        copyBtn.addEventListener('click', async () => {
-          try { await navigator.clipboard.writeText(email); copyBtn.textContent = 'Copiado ✓'; }
-          catch { copyBtn.textContent = 'No se pudo copiar'; }
-          setTimeout(()=>copyBtn.textContent='Copiar', 1800);
-        });
-      }
-      // año footer
-      const y = document.getElementById('year');
-      if (y) y.textContent = new Date().getFullYear();
-    })();
-  </script>
+  <script src="script.js?v=4.2.0"></script>
 </body>
 </html>

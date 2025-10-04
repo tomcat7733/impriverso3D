@@ -1,5 +1,11 @@
-Patch 'Otros servicios' (v4.1.0)
-1) Copia la carpeta 'assets' a tu proyecto.
-2) En tu index.html, reemplaza la sección #otros por el bloque de 'snippets/otros.html'.
-3) Asegúrate de tener las reglas '.badge-wrap' y '.media-badge' en style.css (ya las usas en Materiales).
-4) Publica y Hard Reload (Ctrl/Cmd+Shift+R).
+Impriverso3D — Responsive Patch v4.2.0
+Archivos incluidos:
+- index.html (header responsive + hero video)
+- style.css (video-wrap + mobile nav)
+- script.js (toggle, video ready, copiar email, year)
+- netlify.toml (cache + headers de seguridad)
+
+Cómo aplicar:
+1) Copia estos archivos a la raíz de tu proyecto (sobrescribe).
+2) Asegúrate de tener en /assets/: hero.mp4 / hero.webm / hero-poster.jpg
+3) Deploy en Netlify y Hard Reload (Ctrl/Cmd+Shift+R).
