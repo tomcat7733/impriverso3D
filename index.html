@@ -6,9 +6,20 @@
   <title>Impriverso3D | Impresión 3D (PLA y PETG)</title>
   <meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Diseño 3D, presupuestos y soporte técnico.">
   <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
-  <link rel="stylesheet" href="style.css?v=4.2.2"/>
+  <link rel="stylesheet" href="style.css?v=4.3.0"/>
 </head>
 <body>
+  <!-- Fondo global: vídeo desenfocado -->
+  <div class="site-bg" aria-hidden="true">
+    <video id="bgVideo" class="bg-video" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg">
+      <source src="assets/hero.webm" type="video/webm">
+      <source src="assets/hero.mp4" type="video/mp4">
+    </video>
+    <img class="bg-poster" src="assets/hero-poster.jpg" alt="" />
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- Header / Nav -->
   <header class="site-header">
     <div class="wrap">
       <a class="brand" href="#">
@@ -27,6 +38,7 @@
     </div>
   </header>
 
+  <!-- Hero con vídeo local -->
   <section class="hero">
     <div class="wrap hero-grid">
       <div class="hero-copy">
@@ -50,6 +62,7 @@
     </div>
   </section>
 
+  <!-- Tipos de fabricación -->
   <section id="tipos" class="section">
     <div class="wrap">
       <h2>Tipos de fabricación disponibles</h2>
@@ -85,6 +98,7 @@
     </div>
   </section>
 
+  <!-- Materiales -->
   <section id="materiales" class="section alt">
     <div class="wrap">
       <h2>Materiales de impresión 3D</h2>
@@ -124,6 +138,7 @@
     </div>
   </section>
 
+  <!-- Presupuesto -->
   <section id="presupuesto" class="section">
     <div class="wrap">
       <h2>Presupuesto</h2>
@@ -142,6 +157,7 @@
     </div>
   </section>
 
+  <!-- Detalles -->
   <section id="detalles" class="section alt">
     <div class="wrap">
       <h2>Detalles técnicos</h2>
@@ -182,6 +198,7 @@
     </div>
   </section>
 
+  <!-- YouTube -->
   <section id="videos" class="section">
     <div class="wrap">
       <h2>Vídeos</h2>
@@ -189,6 +206,7 @@
       <div class="media-16x9 iframe-wrap">
         <iframe
           id="ytPlayer"
+          data-channel-id="UClHzwBQlvEPxXcPOFC8bfKw"
           data-video-id="VjZc9nk2jdg"
           src="about:blank"
           title="Impriverso3D YouTube"
@@ -201,6 +219,7 @@
     </div>
   </section>
 
+  <!-- Otros servicios -->
   <section id="otros" class="section alt">
     <div class="wrap">
       <h2>Otros servicios 3D</h2>
@@ -242,6 +261,7 @@
     </div>
   </section>
 
+  <!-- Contacto -->
   <section id="contacto" class="section">
     <div class="wrap">
       <h2>Contacto</h2>
@@ -278,6 +298,8 @@
     </div>
   </footer>
 
-  <script src="script.js?v=4.2.4"></script>
+  <!-- JS -->
+  <script src="script.js?v=4.3.0"></script>
+  <script src="scripts/bg-video-helper.js?v=4.3.0"></script>
 </body>
 </html>

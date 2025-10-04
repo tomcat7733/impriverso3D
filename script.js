@@ -1,4 +1,4 @@
-/* Impriverso3D scripts v4.2.4 */
+/* Impriverso3D scripts v4.3.0 */
 (function(){
   // --- Mobile nav toggle ---
   const toggle = document.querySelector('.nav-toggle');
@@ -41,18 +41,34 @@
   const y = document.getElementById('year');
   if (y) y.textContent = new Date().getFullYear();
 
-  // --- YouTube embed (dinámico con fallback) ---
+  // --- YouTube embed robusto: API -> playlist uploads -> fallback fijo ---
   const yt = document.getElementById('ytPlayer');
   if (yt){
     const fallbackId = yt.getAttribute('data-video-id') || 'VjZc9nk2jdg';
-    const build = (id) => `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
+    const channelId  = yt.getAttribute('data-channel-id');
 
-    fetch('/api/youtube-latest', { cache: 'no-store' })
+    const buildSingle  = (id) => `https://www.youtube.com/embed/${id}?rel=0&modestbranding=1&playsinline=1`;
+    const buildUploads = (cid) => {
+      if (!cid || !/^UC/.test(cid)) return null;
+      const uploads = 'UU' + cid.slice(2);
+      return `https://www.youtube.com/embed/videoseries?list=${uploads}&rel=0&modestbranding=1&playsinline=1`;
+    };
+    const setSrc = (url) => { yt.src = url; };
+
+    let set = false;
+    fetch('/api/youtube-latest?t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(d => {
-        const id = d.id || d.videoId || (d && d.items && d.items[0] && (d.items[0].id.videoId || d.items[0].id)) || fallbackId;
-        yt.src = build(id);
+        const id = d.id || d.videoId || (d.items && d.items[0] && (d.items[0].id?.videoId || d.items[0].id)) || null;
+        if (id) { setSrc(buildSingle(id)); set = true; }
+        else throw 0;
       })
-      .catch(() => { yt.src = build(fallbackId); });
+      .catch(() => {
+        const pl = buildUploads(channelId);
+        if (pl){ setSrc(pl); set = true; }
+      })
+      .finally(() => {
+        if (!set) setSrc(buildSingle(fallbackId));
+      });
   }
 })();

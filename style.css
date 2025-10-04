@@ -1,21 +1,5 @@
 /* =========================================================
-   Impriverso3D · styles (v4.2.2)
-   Estructura:
-   1) Variables & Reset
-   2) Base & Utilidades
-   3) Layout global
-   4) Header & Nav
-   5) Botones
-   6) Hero
-   7) Sistema de Media (aspect-ratio, picture, iframe, badges, video)
-   8) Grids
-      8.1) Separación bloques Detalles (#detalles)
-   9) Superficies
-  10) Listas
-  11) Formularios
-  12) Footer
-  13) Responsive
-  14) Extras Contacto
+   Impriverso3D · styles (v4.3.0)
    ========================================================= */
 
 /* 1) Variables & Reset */
@@ -36,8 +20,27 @@ img{ max-width:100%; display:block }
 a{ color:var(--brand); text-decoration:none }
 .lead{ color:var(--muted) }
 .center{ text-align:center }
-.small{ font-size:14px; color:#51606f } /* solo texto pequeño */
+.small{ font-size:14px; color:#51606f }
 .hidden{ display:none }
+
+/* 0) Full-page background video */
+.site-bg{
+  position: fixed; inset: 0; z-index: -1;
+  overflow: hidden; pointer-events: none;
+}
+.bg-video,.bg-poster{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit:cover; transform:scale(1.08); will-change:transform,filter;
+}
+.bg-video{ filter: blur(18px) brightness(0.9) saturate(1.05) }
+.bg-poster{ display:none; filter: blur(18px) brightness(0.9) saturate(1.05) }
+.bg-overlay{
+  position:absolute; inset:0;
+  background: radial-gradient(1200px 800px at 50% -10%, rgba(255,255,255,.65), rgba(255,255,255,.85) 55%, rgba(255,255,255,.96) 100%);
+}
+@media (prefers-reduced-motion: reduce){ .bg-video{display:none} .bg-poster{display:block} }
+.site-bg.bg-video-fallback .bg-video{ display:none } .site-bg.bg-video-fallback .bg-poster{ display:block }
+@media (max-width:480px){ .bg-video,.bg-poster{transform:scale(1.04)} .bg-video{filter:blur(16px) brightness(.92)} }
 
 /* 3) Layout global */
 .wrap{ max-width:1100px; margin:0 auto; padding:0 18px }
@@ -89,106 +92,61 @@ a{ color:var(--brand); text-decoration:none }
   background:#eef4f8; border:2px dashed #cfe0ea; border-radius:12px;
   color:#7a8a99; font-size:14px;
 }
-
-/* --- Hero comfy gutters & text width --- */
-.hero .wrap{
-  padding-left: 24px;
-  padding-right: 24px;     /* más aire que el resto solo en hero */
-}
-.hero-copy{
-  padding-left: 8px;       /* micro sangría para que no “pegue” al borde */
-  max-width: 640px;        /* limita el ancho de lectura del H1 + lead */
-}
+/* Hero gutters */
+.hero .wrap{ padding-left:24px; padding-right:24px }
+.hero-copy{ padding-left:8px; max-width:640px }
 @media (max-width:900px){
   .hero .wrap{ padding-left:18px; padding-right:18px }
   .hero-copy{ padding-left:6px; padding-right:6px }
 }
 
-/* 7) Sistema de Media (aspect-ratio, picture, iframe, badges, video) */
+/* 7) Sistema de Media */
 .media-16x9{ aspect-ratio:16/9 }
 .media-4x3 { aspect-ratio:4/3 }
 .media-1x1 { aspect-ratio:1/1 }
-
-/* Los contenedores media llevan borde y radio por defecto */
-.media-16x9, .media-4x3, .media-1x1{
-  position:relative; overflow:hidden;
-  border-radius:12px; border:1px solid var(--line);
+.media-16x9,.media-4x3,.media-1x1{
+  position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line);
 }
-
-/* Imagen dentro de media: llenado sin deformar (crop si hace falta) */
 picture{ display:block }
-.media-16x9 img,
-.media-4x3 img,
-.media-1x1 img{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover; display:block; border:0;
+.media-16x9 img,.media-4x3 img,.media-1x1 img{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; border:0;
 }
-
-/* Si quieres altura mínima solo cuando .small acompaña a un media */
-.media-16x9.small, .media-4x3.small, .media-1x1.small{ min-height:120px }
-
-/* Badges sobre la imagen (si se usan) */
+.media-16x9.small,.media-4x3.small,.media-1x1.small{ min-height:120px }
 .badge-wrap{ position:relative }
 .media-badge{
   position:absolute; top:10px; left:10px; z-index:2;
   padding:6px 10px; border-radius:999px;
-  background:rgba(10,17,23,.55); color:#fff; font-size:12px;
-  backdrop-filter:blur(6px);
+  background:rgba(10,17,23,.55); color:#fff; font-size:12px; backdrop-filter:blur(6px);
 }
-
-/* Iframes (YouTube) */
-.iframe-wrap, .yt-frame{
-  position:relative; overflow:hidden; border-radius:12px;
-  border:1px solid var(--line); background:#000;
-}
-.iframe-wrap iframe, .yt-frame iframe{
-  position:absolute; inset:0; width:100%; height:100%;
-  display:block; border:0;
-}
-
-/* Vídeo del hero en full-bleed */
-.video-wrap{
-  position:relative; overflow:hidden; border-radius:12px;
-  border:1px solid var(--line); background:#000;
-}
-.video-wrap video, .video-wrap .hero-poster{
-  position:absolute; inset:0; width:100%; height:100%;
-  object-fit:cover; display:block; border:0;
-}
+.iframe-wrap,.yt-frame{ position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line); background:#000 }
+.iframe-wrap iframe,.yt-frame iframe{ position:absolute; inset:0; width:100%; height:100%; display:block; border:0 }
+.video-wrap{ position:relative; overflow:hidden; border-radius:12px; border:1px solid var(--line); background:#000 }
+.video-wrap video,.video-wrap .hero-poster{ position:absolute; inset:0; width:100%; height:100%; object-fit:cover; display:block; border:0 }
 .video-wrap .hero-poster{ opacity:0; transition:opacity .28s ease }
 .video-wrap.video-loading .hero-poster{ opacity:1 }
 
 /* 8) Grids */
 .grid-2{ display:grid; grid-template-columns:1fr 1fr; gap:16px }
 .grid-3{ display:grid; grid-template-columns:repeat(3,1fr); gap:16px }
-
-/* 8.1) Separación bloques Detalles (#detalles) */
-#detalles .grid-3 + .grid-2.push{ margin-top:24px }        /* default */
-@media (min-width:1100px){
-  #detalles .grid-3 + .grid-2.push{ margin-top:28px }      /* desktop grande */
-}
-@media (max-width:900px){
-  #detalles .grid-3 + .grid-2.push{ margin-top:18px }      /* móvil compacto */
-}
+/* Detalles: separación entre bloques */
+#detalles .grid-3 + .grid-2.push{ margin-top:24px }
+@media (min-width:1100px){ #detalles .grid-3 + .grid-2.push{ margin-top:28px } }
+@media (max-width:900px){  #detalles .grid-3 + .grid-2.push{ margin-top:18px } }
 
 /* 9) Superficies */
-.card, .panel, .spec{
+.card,.panel,.spec{
   background:#fff; border:1px solid var(--line);
   border-radius:var(--radius); padding:16px; box-shadow:var(--shadow);
 }
 .card.muted{ opacity:.6 }
-.notice{
-  margin-top:14px; padding:12px; border:1px dashed #b6dada;
-  border-radius:12px; background:#f4fbfb; color:#174242;
-}
+.notice{ margin-top:14px; padding:12px; border:1px dashed #b6dada; border-radius:12px; background:#f4fbfb; color:#174242 }
 
 /* 10) Listas */
 .bullets{ margin:0; padding-left:18px }
 .ticks{ margin:0; padding-left:18px }
 
 /* 11) Formularios */
-.input, .select, .textarea{
+.input,.select,.textarea{
   width:100%; padding:10px; border:1px solid var(--line);
   border-radius:10px; background:#fff; color:#0a1117;
 }
@@ -197,7 +155,7 @@ picture{ display:block }
 .site-footer{ background:#f7fafc }
 .site-footer .wrap{ padding:16px 18px; color:#5b6b79 }
 
-/* 13) Responsive */
+/* 13) Responsive + Mobile Nav vertical */
 @media (max-width:900px){
   .grid-2{ grid-template-columns:1fr }
   .grid-3{ grid-template-columns:1fr }
@@ -209,16 +167,17 @@ picture{ display:block }
 
   .nav-toggle{ display:inline-flex; margin-left:auto }
   .nav{
-    display:none; width:100%; flex-wrap:wrap;
-    gap:8px; padding:8px 0;
+    display:none; width:100%; flex-wrap:nowrap; flex-direction:column;
+    align-items:stretch; gap:0; padding:4px; margin-top:8px;
+    border:1px solid var(--line); border-radius:12px; background:#fff; box-shadow:var(--shadow); z-index:60;
   }
   .nav.is-open{ display:flex }
-  .nav a{ padding:8px 10px; font-size:14px }
-  .nav .btn.primary{ width:100%; justify-content:center }
+  .nav a{ display:block; padding:14px 12px; font-size:16px; line-height:1.2 }
+  .nav a + a{ border-top:1px solid var(--line) }
+  .nav .btn.primary{ width:100%; justify-content:center; margin-top:6px; border-top:0 }
+  .nav a:active, .nav a:focus-visible{ background:#eef6f6; outline:none }
 }
-@media (max-width:1200px){
-  .nav a{ padding:8px 10px }
-}
+@media (max-width:1200px){ .nav a{ padding:8px 10px } }
 
 /* 14) Extras Contacto */
 #contacto code{
@@ -227,49 +186,5 @@ picture{ display:block }
 }
 #contacto .panel .cta-row{ gap:8px }
 
-/* --- Mobile nav: vertical, limpio y full-width --- */
-@media (max-width:900px){
-  /* contenedor del menú cuando se abre */
-  .nav{
-    /* ya controlamos el display con .is-open desde JS */
-    flex-direction: column;      /* 🔥 vertical */
-    align-items: stretch;        /* que cada item ocupe todo el ancho */
-    width: 100%;
-    gap: 0;                      /* sin huecos entre items */
-    padding: 4px;
-    margin-top: 8px;
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    background: #fff;
-    box-shadow: var(--shadow);
-    z-index: 60;                 /* por encima del contenido */
-  }
-
-  /* links como bloques, con alto de toque cómodo */
-  .nav a{
-    display: block;
-    padding: 14px 12px;          /* >=44px área táctil approx */
-    font-size: 16px;
-    line-height: 1.2;
-  }
-
-  /* separadores entre items */
-  .nav a + a{
-    border-top: 1px solid var(--line);
-  }
-
-  /* CTA "Contacto" destacado: sin separador arriba y a ancho completo */
-  .nav .btn.primary{
-    width: 100%;
-    justify-content: center;
-    margin-top: 6px;
-    border-top: 0;               /* anula el separador */
-  }
-
-  /* feedback rápido en tap/focus */
-  .nav a:active,
-  .nav a:focus-visible{
-    background: #eef6f6;
-    outline: none;
-  }
-}
+/* Optional: secciones con fondo sólido encima del bg video */
+.section.solid{ background:#fff }
