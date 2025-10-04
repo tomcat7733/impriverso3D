@@ -1,21 +1,12 @@
-Impriverso3D — Patch cache-busting v4.0.1
+Cómo usar este patch (Tipos de fabricación):
 
-Qué hace
-- Mata automáticamente cualquier Service Worker y caches antiguos en la primera visita.
-- Fuerza recarga de assets (version bump ?v=4.0.1).
-- Suma cabeceras de caché recomendadas para Netlify.
+1) Copia la carpeta 'assets' de este ZIP dentro de tu proyecto (sobrescribe si te pregunta).
+2) En tu index.html, ve a la sección "Tipos de fabricación" y, dentro de cada <article class="card">,
+   reemplaza el <div class="ph media-4x3"></div> por cada bloque de 'snippets/tipos.html' en ese mismo orden.
+3) Asegúrate de tener en style.css estas reglas (ya deberías, pero por si acaso):
 
-Cómo aplicar
-1) Reemplaza tu archivo `script.js` por el de este patch.
-2) En tu `index.html`, cambia:
-   - <link rel="stylesheet" href="style.css?v=4.0.0">  ->  style.css?v=4.0.1
-   - <script src="script.js?v=4.0.0"></script>        ->  script.js?v=4.0.1
-   (Si tu index usa otra versión, pon igualmente ?v=4.0.1)
-   Si lo prefieres, pega el contenido de `index_patch_snippet.html`.
-3) (Opcional pero recomendado) Mezcla el contenido de `netlify_headers_addition.toml`
-   con tu `netlify.toml` y despliega.
-4) En Netlify: Clear cache and deploy.
-5) En tu navegador: Hard reload (Ctrl/Cmd+Shift+R).
+   .media-4x3{ aspect-ratio:4/3 }
+   picture.media-4x3{ display:block;width:100%;overflow:hidden;border-radius:12px;border:1px solid var(--line);background:#eef4f8 }
+   .media-4x3 > img{ width:100%;height:100%;display:block;object-fit:cover }
 
-Variables de entorno (por si acaso)
-- YT_CHANNEL_ID=UClHzwBQlvEPxXcPOFC8bfKw (o YT_HANDLE=Impriverso3D)
+4) Haz deploy en Netlify y fuerza recarga (Ctrl/Cmd+Shift+R).
