@@ -1,1 +1,16 @@
-{"name":"Impriverso3D","short_name":"Impriverso3D","start_url":"/","display":"standalone","background_color":"#ffffff","theme_color":"#0b6b6b","icons":[{"src":"assets/logo.svg","sizes":"any","type":"image/svg+xml"}]}
+{
+  "name": "Impriverso3D",
+  "short_name": "Impriverso3D",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0b6b6b",
+  "icons": [
+    {
+      "src": "assets/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

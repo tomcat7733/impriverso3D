@@ -1,65 +1,93 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<!-- SOLO el bloque de contacto para reemplazar en tu index.html -->
-<section id="contacto" class="section">
-  <div class="container">
-    <h2 data-i18n="contact_title">Contáctame</h2>
-    <p class="sub">
-      Escríbeme por Instagram o Wallapop. Si prefieres email, deja tus datos y te contacto.
-    </p>
-
-    <div class="contact-quick">
-      <a class="contact-chip ig" href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener" aria-label="Abrir Instagram Impriverso3D">
-        <img src="assets/ig.svg" alt="Instagram"/>
-        @impriverso3d
-        <span class="chip-cta">Enviar DM</span>
-      </a>
-
-      <a class="contact-chip wallapop" href="https://es.wallapop.com/user/raulg-72063226" target="_blank" rel="noopener" aria-label="Abrir perfil de Wallapop">
-        <img src="assets/wallapop.svg" alt="Wallapop"/>
-        Wallapop
-        <span class="chip-cta">Abrir perfil</span>
-      </a>
-    </div>
-
-    <form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="panel" style="margin-top:14px">
-      <input type="hidden" name="form-name" value="contact">
-      <input type="hidden" id="configSnapshot" name="config_snapshot" value="">
-      <p class="hidden"><label>No rellenar: <input name="bot-field"/></label></p>
-
-      <div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
-        <label>Nombre*<input class="input" type="text" name="nombre" required></label>
-        <label>Email*<input class="input" type="email" name="email" required></label>
-      </div>
-
-      <button class="btn primary" type="submit">Enviar</button>
-      <small class="muted">Tip: suele ser más rápido por
-        <a href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener">Instagram</a>
-        o
-        <a href="https://es.wallapop.com/user/raulg-72063226" target="_blank" rel="noopener">Wallapop</a>.
-      </small>
-    </form>
-  </div>
-</section>
-<!-- Fin del bloque de contacto -->
-=======
-=======
->>>>>>> parent of 142fa58 (.)
-<!doctype html>
-<html lang="es"><head>
-<meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/>
+<!doctype html><html lang="es"><head>
+<meta charset="utf-8"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Impriverso3D | Impresión 3D en PLA y PETG</title>
-<link rel="manifest" href="manifest.json"/><link rel="stylesheet" href="style.css"/>
-</head><body>
-<header class="header"><div class="container"><a class="brand"><img src="assets/logo.svg" alt="logo"/><span>Impriverso3D</span></a></div></header>
-<section class="hero"><div class="container hero-grid">
-  <div><h1 data-i18n="hero_title">Impresión 3D en PLA y PETG</h1><p class="sub" data-i18n="hero_desc">Servicio profesional (FDM) con PLA y PETG.</p></div>
-  <div class="box"><div class="yt-frame"><iframe id="ytPlayer" src="about:blank" allowfullscreen></iframe></div></div>
+<meta name="description" content="Impriverso3D: impresión 3D profesional en PLA y PETG. Prototipos y series cortas (FDM).">
+<link rel="icon" href="assets/logo.svg" type="image/svg+xml"/><link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0b6b6b"/><link rel="stylesheet" href="style.css?v=3.3.1"/>
+<script src="https://unpkg.com/three@0.158.0/build/three.min.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/controls/OrbitControls.js"></script>
+<script src="https://unpkg.com/three@0.158.0/examples/js/loaders/STLLoader.js"></script></head><body>
+<header class="header"><div class="container"><div class="row">
+<a class="brand" href="#"><img src="assets/logo.svg" alt="Impriverso3D logo"/><span>Impriverso3D</span></a>
+<button id="navToggle" class="nav-toggle" aria-label="Abrir menú">☰</button>
+<nav id="nav" class="nav">
+<a href="#presupuesto" data-i18n="nav_budget">Presupuesto online</a>
+<a href="#modelado" data-i18n="nav_model">Modelado 3D</a>
+<a href="#como-funciona" data-i18n="nav_how">¿Cómo funciona?</a>
+<a href="#shop" data-i18n="nav_shop">Tienda</a>
+<a href="#blog" data-i18n="nav_blog">Blog</a>
+<a class="cta" href="#contacto" data-i18n="nav_contact">Contacto</a>
+<button id="langToggle" class="btn ghost" type="button" aria-label="Cambiar idioma">ES/EN</button>
+</nav></div></div></header>
+
+<section class="hero"><div class="container hero-grid"><div>
+<h1 data-i18n="hero_title">Impresión 3D en PLA y PETG</h1>
+<p class="sub" data-i18n="hero_desc">Servicio profesional (FDM) con PLA y PETG. Prototipos, series cortas y piezas funcionales.</p>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:14px 0 6px">
+<a href="#presupuesto" class="btn primary" data-i18n="hero_cta1">Calcular precio</a>
+<a href="#contacto" class="btn ghost" data-i18n="hero_cta2">Presupuesto personalizado</a></div>
+<ul class="kpis"><li data-i18n="badges">PLA · PETG</li><li>FDM</li><li>Entrega 48–72h</li></ul>
+</div><div><div class="box"><div class="yt-frame">
+<iframe id="ytPlayer" data-fixed="1" width="560" height="315" src="https://www.youtube.com/embed/VjZc9nk2jdg?rel=0" title="Impriverso3D video destacado" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+</div></div></div></div></section>
+
+<section id="como-funciona" class="section"><div class="container">
+<h2 data-i18n="steps_title">¿Cómo funciona nuestro servicio?</h2>
+<div class="grid-steps">
+<div class="step"><h4 data-i18n="step1">Elige tu pieza</h4><p class="sub" data-i18n="step1_desc">Encuéntrala en repositorios o cuéntame tu idea para modelarla desde cero.</p></div>
+<div class="step"><h4 data-i18n="step2">Súbela</h4><p class="sub" data-i18n="step2_desc">Usa el cotizador online para subir tu .stl/.obj/.zip y ajustar parámetros.</p></div>
+<div class="step"><h4 data-i18n="step3">Compra</h4><p class="sub" data-i18n="step3_desc">Añade al carrito (Stripe) o pide presupuesto si es a medida.</p></div>
+<div class="step"><h4 data-i18n="step4">Recibe</h4><p class="sub" data-i18n="step4_desc">Envío a toda España. Recogida local opcional.</p></div>
+</div></div></section>
+
+<section id="presupuesto" class="section config"><div class="container">
+<h2>Presupuesto online</h2><p class="sub">Sube tu STL, ajusta parámetros y obtén una estimación.</p>
+<div class="config-grid"><div class="panel">
+<label class="file-drop" id="fileDrop"><input type="file" id="stlInput" accept=".stl" hidden><span>Arrastra tu archivo <strong>.stl</strong> o haz clic</span></label>
+<div class="field"><label>Tamaño máx. (cm) <strong id="sizeVal">10</strong></label><input class="input" type="range" id="size" min="2" max="40" value="10"></div>
+<div class="field"><label>Material</label><select class="select" id="material"><option>PLA</option><option>PETG</option></select></div>
+<div class="field"><label>Relleno <strong id="infillVal">20</strong>%</label><input class="input" type="range" id="infill" min="0" max="100" value="20"></div>
+<div class="field"><label>Acabado</label><select class="select" id="finish"><option value="estandar">Estándar</option><option value="premium">Premium (lijado + pintado)</option></select></div>
+<div class="price-box"><div><small>Estimación</small><div class="price"><span id="price">—</span> €</div></div><button id="addToQuote" class="btn primary">Añadir</button></div>
+</div><div class="viewer"><canvas id="stlCanvas"></canvas></div></div></div></section>
+
+<section id="media" class="section"><div class="container yt-ig">
+<div class="box"><h2 data-i18n="yt_title">YouTube</h2><div class="yt-frame"><iframe id="ytPlayer2" width="560" height="315" src="about:blank" title="Impriverso3D video 2" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></div></div>
+<div class="box"><h2 data-i18n="ig_title">Instagram</h2><div class="ig-grid"><div class="ig-placeholder">Cargando el feed…</div></div></div>
 </div></section>
-<section id="media" class="section"><div class="container"><div class="box"><h2>YouTube</h2><div class="yt-frame"><iframe id="ytPlayer2" src="about:blank" allowfullscreen></iframe></div></div></div></section>
-<<<<<<< HEAD
-<script src="script.js"></script></body></html>
->>>>>>> parent of 142fa58 (.)
-=======
-<script src="script.js"></script></body></html>
->>>>>>> parent of 142fa58 (.)
+
+<section id="shop" class="section pricing"><div class="container">
+<h2 data-i18n="pricing_title">Packs estándar</h2><p class="sub" data-i18n="pricing_desc">Compra directa con Stripe. Para piezas a medida, usa el cotizador.</p>
+<div class="cards">
+<article class="card"><h3>PLA Proto</h3><p>Prototipo PLA, ≤120mm, 0.2mm capa.</p><button class="btn primary" data-product="pla" data-i18n="buy">Comprar</button></article>
+<article class="card"><h3>PETG Pro</h3><p>Alta resistencia, ≤100mm, PETG, buena adhesión térmica.</p><button class="btn primary" data-product="petg" data-i18n="buy">Comprar</button></article>
+<article class="card"><h3>Express 48h</h3><p>Cola prioritaria, FDM rápido, ≤100mm (PLA/PETG).</p><button class="btn primary" data-product="express" data-i18n="buy">Comprar</button></article>
+</div></div></section>
+
+<section id="contacto" class="section"><div class="container">
+<h2 data-i18n="contact_title">Contáctame</h2><p class="sub" data-i18n="contact_desc">Cuéntame tu proyecto y te paso una propuesta cerrada.</p>
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="panel">
+<input type="hidden" name="form-name" value="contact"><input type="hidden" id="configSnapshot" name="config_snapshot" value="">
+<p class="hidden"><label>No rellenar: <input name="bot-field"/></label></p>
+<div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(260px,1fr));">
+<label>Nombre*<input class="input" type="text" name="nombre" required></label>
+<label>Email*<input class="input" type="email" name="email" required></label>
+<label>Tipo<select class="select" name="tipo"><option>Prototipo</option><option>Pieza funcional</option><option>Decorativo</option></select></label>
+<label>Archivo (STL/ZIP)<input class="input" type="file" name="archivo"></label>
+</div>
+<label>Descripción*<textarea class="textarea" name="mensaje" rows="5" required placeholder="Dimensiones, material, uso…"></textarea></label>
+<button class="btn primary" type="submit">Enviar</button>
+</form></div></section>
+
+<footer class="footer"><div class="container"><p>© <span id="year"></span> <strong>Impriverso3D</strong>. <span data-i18n="footer_rights">Impriverso3D — Servicio profesional de impresión 3D.</span></p>
+<div class="social"><a href="https://www.youtube.com/@Impriverso3D" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.instagram.com/impriverso3d/" target="_blank" rel="noopener">@impriverso3d</a> · <a href="mailto:contacto@impriverso3d.com">contacto@impriverso3d.com</a></div></div></footer>
+
+<div id="ai-widget" class="ai-widget" aria-live="polite">
+<button id="ai-fab" class="ai-fab" aria-label="Abrir asistente IA" aria-expanded="false">🤖</button>
+<div id="ai-panel" class="ai-panel" aria-hidden="true" role="dialog"><div class="ai-header">
+<div class="ai-title"><span data-i18n="ai_title">Asistente 3D · Filamento</span></div><button id="ai-close" class="ai-close" aria-label="Cerrar">×</button></div>
+<div id="ai-messages" class="ai-messages"><div class="ai-msg ai-bot"><div class="ai-bubble">¡Hola! Cuéntame tu setup (impresora, material y parámetros) o el problema que tienes 🔧</div></div></div>
+<form id="ai-form" class="ai-form"><input id="ai-input" name="q" type="text" data-i18n-placeholder="ai_placeholder" placeholder="Ej. stringing PLA a 210°C, 0.2mm, 60mm/s…" autocomplete="off" required/><button class="btn primary" type="submit">Enviar</button></form>
+<div class="ai-footnote"><span data-i18n="ai_privacy">Privado. Tus datos no se publican. LLM.</span></div></div></div>
+<a class="wa-fab" href="https://wa.me/34123456789" target="_blank" rel="noopener" aria-label="WhatsApp">💬</a>
+<script src="script.js?v=3.3.1"></script></body></html>
