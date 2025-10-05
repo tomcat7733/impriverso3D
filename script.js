@@ -1,4 +1,4 @@
-/* Impriverso3D scripts v4.3.3 */
+/* Impriverso3D scripts v4.3.6 */
 (function(){
   const toggle = document.querySelector('.nav-toggle');
   const nav = document.getElementById('mainnav');
@@ -54,7 +54,6 @@
     fetch('/api/youtube-latest?t=' + Date.now(), { cache: 'no-store' })
       .then(r => r.ok ? r.json() : Promise.reject())
       .then(d => {
-        // intentamos varias formas comunes de respuesta
         const id =
           d.id ||
           d.videoId ||
@@ -73,5 +72,48 @@
         // 3) Último recurso: vídeo fijo de reserva
         if (!set) setSrc(buildSingle(fallbackId));
       });
+  }
+
+})();
+
+/* === AI Widget: montaje de chips de ayuda en la cabecera === */
+(function () {
+  const TPL_SELECTOR = '#aiw-chips-tpl';
+
+  function injectChips() {
+    const head = document.querySelector('.aiw-head');
+    const tpl  = document.querySelector(TPL_SELECTOR);
+
+    if (!head || !tpl?.content?.firstElementChild) return false; // aún no existe
+    if (head.querySelector('.aiw-chips')) return true;            // ya montados
+
+    head.appendChild(tpl.content.firstElementChild.cloneNode(true));
+
+    // Autorelleno del input al pulsar chip
+    head.addEventListener('click', (e) => {
+      const chip = e.target.closest('.aiw-chip');
+      if (!chip) return;
+      const input = document.querySelector('.aiw-input');
+      if (input) {
+        input.value = chip.dataset.fill || chip.textContent.trim();
+        input.focus();
+      }
+    });
+
+    return true;
+  }
+
+  function boot() {
+    if (injectChips()) return;
+    const mo = new MutationObserver(() => {
+      if (injectChips()) mo.disconnect();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', boot);
+  } else {
+    boot();
   }
 })();
