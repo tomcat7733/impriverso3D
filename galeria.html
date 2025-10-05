@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <title>Galería | Impriverso3D</title>
+  <meta name="description" content="Galería de proyectos de Impriverso3D: piezas con y sin retroiluminación.">
+  <link rel="icon" href="assets/logo.svg" type="image/svg+xml"/>
+  <link rel="stylesheet" href="style.css?v=4.3.5"/>
+
+  <style>
+    /* Barra de filtros y lightbox: estilos específicos de esta página */
+    .filterbar{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:12px 0 18px}
+    .filterbar .btn.toggle{border:1px solid var(--line);background:#fff}
+    .filterbar .btn.toggle.active{background:linear-gradient(135deg,var(--brand2),var(--brand));color:#fff;border:none}
+
+    /* Pequeños ajustes visuales de la rejilla en esta página */
+    .gallery-grid h3{ text-align:center; margin:10px 0 0 }
+
+    /* Lightbox */
+    .lightbox{position:fixed;inset:0;background:rgba(0,0,0,.8);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100;opacity:0;pointer-events:none;transition:opacity .18s ease}
+    .lightbox.is-open{opacity:1;pointer-events:auto}
+    .lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.45)}
+    .lightbox .close{position:absolute;top:14px;right:14px;border:0;border-radius:10px;padding:10px 12px;cursor:pointer;background:#fff}
+  </style>
+</head>
+<body>
+  <!-- Header interno con tinte mesh -->
+  <header class="site-header header--mesh">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <img src="assets/logo.svg" alt="Impriverso3D" />
+        <span>Impriverso3D</span>
+      </a>
+      <button class="nav-toggle" aria-controls="mainnav" aria-expanded="false" aria-label="Abrir menú">☰</button>
+      <nav id="mainnav" class="nav">
+        <a href="index.html#tipos">Impresión 3D</a>
+        <a href="index.html#materiales">Materiales</a>
+        <a href="index.html#presupuesto">Presupuesto</a>
+        <a href="index.html#detalles">Detalles</a>
+        <a href="galeria.html" class="btn gallery" aria-current="page">Galería</a>
+        <a href="index.html#contacto" class="btn primary">Contacto</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero con mesh animado -->
+  <section class="hero alt--mesh-anim">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <h1>Galería de proyectos</h1>
+        <p class="lead">Una selección de trabajos con y sin <strong>retroiluminación</strong>.</p>
+        <div class="cta-row">
+          <a href="#galeria" class="btn">Ver galería</a>
+          <a href="index.html#contacto" class="btn ghost">Pedir algo parecido</a>
+        </div>
+      </div>
+      <div class="hero-media">
+        <div class="media-16x9 video-wrap">
+          <video autoplay muted loop playsinline preload="auto" poster="assets/gallery-hero-poster.jpg">
+            <source src="assets/gallery-hero.webm" type="video/webm">
+            <source src="assets/gallery-hero.mp4"  type="video/mp4">
+            Tu navegador no soporta video HTML5.
+          </video>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria" class="section alt alt--mesh-anim">
+    <div class="wrap">
+      <h2>Explora</h2>
+
+      <!-- Filtros -->
+      <div class="filterbar" role="tablist" aria-label="Filtros de galería">
+        <button class="btn toggle active" data-filter="all" role="tab" aria-selected="true">Todos</button>
+        <button class="btn toggle" data-filter="retro" role="tab" aria-selected="false">Retroiluminados</button>
+        <button class="btn toggle" data-filter="normal" role="tab" aria-selected="false">Sin retroiluminación</button>
+      </div>
+
+      <!-- Grid -->
+      <div class="grid-3 gallery-grid">
+        <!-- Retro -->
+        <article class="card gallery-item" data-cat="retro">
+          <figure class="badge-wrap media-4x3">
+            <img src="assets/galeria/IMG_1608.jpg" alt="Cubo compañero de Portal 2 iluminado con corazón" loading="lazy" decoding="async">
+          </figure>
+          <h3>Cubo compañero de Portal 2</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="retro">
+          <figure class="badge-wrap media-4x3">
+            <img src="assets/galeria/IMG_3121.jpg" alt="Espadas del Caos de God of War con trazos retroiluminados" loading="lazy" decoding="async">
+          </figure>
+          <h3>Espadas del Caos · God of War</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="retro">
+          <figure class="badge-wrap media-4x3">
+            <img src="assets/galeria/IMG_3157.jpg" alt="Farol Minecraft retroiluminado" loading="lazy" decoding="async">
+          </figure>
+          <h3>Farol Minecraft</h3>
+        </article>
+
+        <!-- Sin retro -->
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_20241208_132120.jpg" alt="Llaveros personalizados multicolor" loading="lazy" decoding="async">
+          </figure>
+          <h3>Llaveros personalizados</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/QR_Personalizado.jpg" alt="QR personalizados multicolor" loading="lazy" decoding="async">
+          </figure>
+          <h3>QR personalizados multicolor</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_1749.jpg" alt="Juego Gonggi del Juego del Calamar impreso en 3D" loading="lazy" decoding="async">
+          </figure>
+          <h3>Juego Gonggi · El juego del calamar</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_1837.jpg" alt="Posavasos Dragon Ball Z" loading="lazy" decoding="async">
+          </figure>
+          <h3>Posavasos Dragon Ball Z</h3>
+        </article>
+
+        <!-- NUEVAS TARJETAS -->
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_4546.jpg" alt="Posavasos Hornet · Silksong (set de 10)" loading="lazy" decoding="async">
+          </figure>
+          <h3>Posavasos Hornet · Silksong</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_4505.jpg" alt="Posavasos casas de Game of Thrones (set)" loading="lazy" decoding="async">
+          </figure>
+          <h3>Posavasos · Game of Thrones</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/1.jpg" alt="Llaveros Hornet · Silksong en varios modelos" loading="lazy" decoding="async">
+          </figure>
+          <h3>Llaveros Hornet · Silksong</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <!-- si no renombras el archivo, mantén el espacio URL-encoded -->
+            <img src="assets/galeria/Imanes-Silksong.jpg" alt="Imanes Silksong (set)" loading="lazy" decoding="async">
+          </figure>
+          <h3>Imanes Silksong</h3>
+        </article>
+
+        <!-- Más existentes que ya tenías -->
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_2445.jpg" alt="Figuras estilo Funko (Escape From Tarkov)" loading="lazy" decoding="async">
+          </figure>
+          <h3>Funkos · Escape From Tarkov</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="retro">
+          <figure class="badge-wrap media-4x3">
+            <img src="assets/galeria/IMG_1503.jpg" alt="Mjölnir God Of War retroiluminado" loading="lazy" decoding="async">
+          </figure>
+          <h3>Mjölnir God Of War retroiluminado</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_2237.jpg" alt="Mjölnir (martillo de Thor) pintado" loading="lazy" decoding="async">
+          </figure>
+          <h3>Mjölnir pintado</h3>
+        </article>
+
+        <article class="card gallery-item" data-cat="normal">
+          <figure class="media-4x3">
+            <img src="assets/galeria/IMG_1616.jpg" alt="Llaveros con nombres personalizados multicolor" loading="lazy" decoding="async">
+          </figure>
+          <h3>Llaveros con nombre</h3>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>© <span id="year"></span> Impriverso3D — Impresión 3D en PLA y PETG.</p>
+    </div>
+  </footer>
+
+  <script src="script.js?v=4.3.4"></script>
+  <script>
+    // Filtros
+    const buttons = document.querySelectorAll('.filterbar .btn.toggle');
+    const items = document.querySelectorAll('.gallery-item');
+    buttons.forEach(btn=>{
+      btn.addEventListener('click',()=>{
+        buttons.forEach(b=>{ b.classList.remove('active'); b.setAttribute('aria-selected','false'); });
+        btn.classList.add('active'); btn.setAttribute('aria-selected','true');
+        const f = btn.dataset.filter; // all | retro | normal
+        items.forEach(it=>{
+          it.classList.toggle('hidden', f!=='all' && it.dataset.cat!==f);
+        });
+      });
+    });
+
+    // Lightbox
+    const lb = document.createElement('div');
+    lb.className='lightbox';
+    lb.innerHTML = '<button class="close" aria-label="Cerrar">Cerrar ✕</button><img alt="Vista ampliada">';
+    document.body.appendChild(lb);
+    const lbImg = lb.querySelector('img');
+    const close = ()=>lb.classList.remove('is-open');
+    lb.addEventListener('click', e=>{ if(e.target===lb || e.target.classList.contains('close')) close(); });
+    document.addEventListener('keydown', e=>{ if(e.key==='Escape') close(); });
+    document.querySelectorAll('.gallery-item img').forEach(img=>{
+      img.addEventListener('click', ()=>{
+        lbImg.src = img.currentSrc || img.src;
+        lbImg.alt = img.alt || 'Imagen';
+        lb.classList.add('is-open');
+      });
+    });
+  </script>
+</body>
+</html>
